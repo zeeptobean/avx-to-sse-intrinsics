@@ -18,20 +18,26 @@
 #include <stdint.h>
 #include <nmmintrin.h>  //sse4.2
 
+#ifdef zeept_dup_with_existing
+#define ZEEPTDECL(x) zp##x
+#else
+#define ZEEPTDECL(x) x
+#endif
+
 typedef struct __zeept_m256d {
     __m128d lo;
     __m128d hi;
-} __m256d;
+} ZEEPTDECL(__m256d);
 
 typedef struct __zeept_m256 {
     __m128 lo;
     __m128 hi;
-} __m256;
+} ZEEPTDECL(__m256);
 
 typedef struct __zeept_m256i {
     __m128i lo;
     __m128i hi;
-} __m256i;
+} ZEEPTDECL(__m256i);
 
 // #define __m256d __zeept_m256d
 // #define __m256 __zeept_m256

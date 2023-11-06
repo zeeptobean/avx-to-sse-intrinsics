@@ -2,7 +2,7 @@
 
 /**/
 
-__m256i _mm256_set_epi8(char e31, char e30, char e29, char e28, char e27, char e26, char e25, char e24, 
+ZEEPTDECL(__m256i) ZEEPTDECL(_mm256_set_epi8)(char e31, char e30, char e29, char e28, char e27, char e26, char e25, char e24, 
                         char e23, char e22, char e21, char e20, char e19, char e18, char e17, char e16, 
                         char e15, char e14, char e13, char e12, char e11, char e10, char e9, char e8, 
                         char e7, char e6, char e5, char e4, char e3, char e2, char e1, char e0) {
