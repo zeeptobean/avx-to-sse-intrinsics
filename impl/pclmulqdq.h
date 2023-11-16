@@ -1,4 +1,4 @@
-#include <../base.h>
+#include "../base.h"
 
 /**/
 
@@ -10,7 +10,7 @@ __m128i _mm_clmulepi64_si128(__m128i __a, __m128i __b, const int imm8) {
     _mm_store_si128((__m128i*) &b, __b);
 
     op1 = a[imm8 & 1];
-    op2 = a[(imm8 >> 4) & 1];
+    op2 = b[(imm8 >> 4) & 1];
 
     for(int i=0; i < 64; i++) {
         if(op2 & (1LL << i)) {
@@ -39,7 +39,7 @@ __m128i _mm_clmulepi64_si128_zp_impl2(__m128i __a, __m128i __b, const int imm8) 
     _mm_store_si128((__m128i*) &b, __b);
 
     op1 = a[imm8 & 1];
-    op2 = a[(imm8 >> 4) & 1];
+    op2 = b[(imm8 >> 4) & 1];
 
     uint64_t cond = 0;
 
