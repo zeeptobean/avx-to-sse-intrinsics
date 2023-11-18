@@ -1,7 +1,7 @@
 #include "../base.h"
 #include "../internal_func.h"
 
-/**/
+/*byte, unsigned signed*/
 
 __m128i _mm_dpbusd_epi32(__m128i src, __m128i __a, __m128i __b) {
     //Must case sign -> unsign to zero-extend, otherwise sign-extend 
@@ -57,7 +57,7 @@ __m256i _mm256_dpbusd_avx_epi32(__m256i src, __m256i a, __m256i b) {
     return r;
 }
 
-/**/
+/*byte, unsigned signed, saturated*/
 
 __m128i _mm_dpbusds_epi32(__m128i src, __m128i __a, __m128i __b) {
     uint8_t a[16];
@@ -108,7 +108,7 @@ __m256i _mm256_dpbusds_avx_epi32(__m256i src, __m256i a, __m256i b) {
     return r;
 }
 
-/**/
+/*word, signed signed*/
 
 __m128i _mm_dpwssd_epi32(__m128i src, __m128i __a, __m128i __b) {
     uint16_t a[8], b[8];
@@ -150,7 +150,7 @@ __m256i _mm256_dpwssd_avx_epi32(__m256i src, __m256i a, __m256i b) {
     return r;
 }
 
-/**/
+/*word, signed signed, saturated*/
 
 __m128i _mm_dpwssds_epi32(__m128i src, __m128i __a, __m128i __b) {
     uint16_t a[8], b[8];
@@ -192,3 +192,14 @@ __m256i _mm256_dpwssds_avx_epi32(__m256i src, __m256i a, __m256i b) {
     return r;
 }
 
+/*byte, signed signed*/
+
+/*byte, signed signed, saturated*/
+
+/*byte, signed unsigned*/
+
+/*byte, signed unsigned, saturated*/
+
+/*byte, unsigned unsigned*/
+
+/*byte, unsigned unsigned, saturated*/
