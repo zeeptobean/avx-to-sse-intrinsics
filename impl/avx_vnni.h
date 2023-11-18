@@ -111,7 +111,7 @@ __m256i _mm256_dpbusds_avx_epi32(__m256i src, __m256i a, __m256i b) {
 /*word, signed signed*/
 
 __m128i _mm_dpwssd_epi32(__m128i src, __m128i __a, __m128i __b) {
-    uint16_t a[8], b[8];
+    int16_t a[8], b[8];
     _mm_storeu_si128( (__m128i*) a, __a);
     _mm_storeu_si128( (__m128i*) b, __b);
 
@@ -153,7 +153,7 @@ __m256i _mm256_dpwssd_avx_epi32(__m256i src, __m256i a, __m256i b) {
 /*word, signed signed, saturated*/
 
 __m128i _mm_dpwssds_epi32(__m128i src, __m128i __a, __m128i __b) {
-    uint16_t a[8], b[8];
+    int16_t a[8], b[8];
     _mm_storeu_si128( (__m128i*) a, __a);
     _mm_storeu_si128( (__m128i*) b, __b);
 
