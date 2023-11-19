@@ -431,3 +431,11 @@ __m256i _mm256_dpbuuds_epi32(__m256i src, __m256i a, __m256i b) {
     r.lo = _mm_dpbuuds_epi32(src.lo, a.lo, b.lo);
     return r;
 }
+
+/*Optional implementation*/
+
+__m128i _mm_dpwssd_epi32_zp_impl2(__m128i src, __m128i a, __m128i b) {
+    a = _mm_madd_epi16(a, b);
+    a = _mm_add_epi32(a, src);
+    return a;
+}
