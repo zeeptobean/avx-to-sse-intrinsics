@@ -1,4 +1,4 @@
-#include "base.h"
+#include "../base.h"
 
 /**/
 
@@ -11,8 +11,8 @@ __m256d _mm256_ceil_pd(__m256d a) {
 
 __m256 _mm256_ceil_ps(__m256 a) {
     __m256 r;
-    r.lo = _mm_ceil_pd(a.lo);
-    r.hi = _mm_ceil_pd(a.hi);
+    r.lo = _mm_ceil_ps(a.lo);
+    r.hi = _mm_ceil_ps(a.hi);
     return r;
 }
 
@@ -27,8 +27,8 @@ __m256d _mm256_floor_pd(__m256d a) {
 
 __m256 _mm256_floor_ps(__m256 a) {
     __m256 r;
-    r.lo = _mm_floor_pd(a.lo);
-    r.hi = _mm_floor_pd(a.hi);
+    r.lo = _mm_floor_ps(a.lo);
+    r.hi = _mm_floor_ps(a.hi);
     return r;
 }
 
