@@ -53,9 +53,10 @@ void _mm256_storeu2_m128d(double *hi_addr, double *lo_addr, __m256d a) {
     _mm_storeu_pd(hi_addr, a.hi);
 }
 
+/*memcpy to bypass non-portable __m128i_u cast from __m128i*/
 void _mm256_storeu2_m128i(__m128i *hi_addr, __m128i *lo_addr, __m256i a) {
-    _mm_storeu_si128(&hi_addr, a.hi);
-    _mm_storeu_si128(&lo_addr, a.lo);
+    memcpy(&hi_addr, &a.hi, sizeof(__m128i));
+    memcpy(&lo_addr, &a.lo, sizeof(__m128i));
 }
 
 /**/

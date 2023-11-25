@@ -12,7 +12,7 @@ __m256 _mm256_undefined_ps(void) {
     return r;
 }
 
-__m256i _mm256_undefined_sị6(void) {
+__m256i _mm256_undefined_si256(void) {
     __m256i r;
     return r;
 }
