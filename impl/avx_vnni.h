@@ -1,6 +1,10 @@
 #include "../base.h"
 #include "../internal_func.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*byte, unsigned signed*/
 
 __m128i _mm_dpbusd_epi32(__m128i src, __m128i __a, __m128i __b) {
@@ -439,3 +443,7 @@ __m128i _mm_dpwssd_epi32_zp_impl2(__m128i src, __m128i a, __m128i b) {
     a = _mm_add_epi32(a, src);
     return a;
 }
+
+#ifdef __cplusplus
+}
+#endif

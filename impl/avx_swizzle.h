@@ -1,6 +1,10 @@
 #include "../base.h"
 #include "avx_cast.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**/
 
 __m256d _mm256_blend_pd(__m256d a, __m256d b, const int imm8) {
@@ -387,3 +391,7 @@ __m256 _mm256_shuffle_ps_zp_impl2(__m256 __a, __m256 __b, const int __imm8) {
     r.hi = _mm_loadu_ps(ret+4);
     return r;
 }
+
+#ifdef __cplusplus
+}
+#endif

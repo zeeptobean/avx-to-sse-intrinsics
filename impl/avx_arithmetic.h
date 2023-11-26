@@ -1,5 +1,9 @@
 #include <../base.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**/
 
 __m256d _mm256_add_pd(__m256d a, __m256d b) {
@@ -120,3 +124,7 @@ __m256 _mm256_sub_ps(__m256 a, __m256 b) {
     ret.hi = _mm_sub_ps(a.hi, b.hi);
     return ret;
 }
+
+#ifdef __cplusplus
+}
+#endif

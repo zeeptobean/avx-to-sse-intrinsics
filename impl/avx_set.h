@@ -1,5 +1,9 @@
 #include <base.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**/
 
 __m256i _mm256_set_epi8(char e31, char e30, char e29, char e28, char e27, char e26, char e25, char e24, 
@@ -207,3 +211,7 @@ __m256 _mm256_set1_ps(float a) {
     r.lo = _mm_set1_ps(a);
     return r;
 }
+
+#ifdef __cplusplus
+}
+#endif

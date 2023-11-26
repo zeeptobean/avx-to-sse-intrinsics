@@ -1,5 +1,9 @@
 #include "base.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**/
 
 __m256d _mm256_movedup_pd(__m256d a) {
@@ -20,3 +24,7 @@ __m256 _mm256_moveldup_ps(__m256 a) {
     r.hi = _mm_moveldup_ps(a.hi);
     r.lo = _mm_moveldup_ps(a.lo);
 }
+
+#ifdef __cplusplus
+}
+#endif

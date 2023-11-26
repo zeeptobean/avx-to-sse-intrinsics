@@ -1,6 +1,10 @@
 #include <../base.h>
 #include <../internal_func.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * no multiply qword -> double qword so do manual mul
  **/
@@ -194,3 +198,7 @@ __m256i _mm256_madd52hi_epu64_zp_impl2(__m256i __X, __m256i __Y, __m256i __Z) {
     
     return reg;
 }
+
+#ifdef __cplusplus
+}
+#endif

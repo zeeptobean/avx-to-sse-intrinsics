@@ -1,5 +1,9 @@
 #include "base.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**/
 
 void _mm256_store_pd(double *mem, __m256d a) {
@@ -127,3 +131,7 @@ void _mm256_maskstore_ps(float *mem_addr, __m256i __mask, __m256 __a) {
     if(mask[6] >> 31) mem_addr[6] = a[6];
     if(mask[7] >> 31) mem_addr[7] = a[7];
 }
+
+#ifdef __cplusplus
+}
+#endif

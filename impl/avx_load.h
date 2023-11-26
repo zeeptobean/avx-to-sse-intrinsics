@@ -1,5 +1,9 @@
 #include "../base.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 __m256d _mm256_broadcast_pd(__m128d const *mem_addr) {
     __m256d r;
     r.lo = *mem_addr;
@@ -177,3 +181,7 @@ __m128 _mm_maskload_ps_zp_impl2(float const *mem_addr, __m128i __mask) {
     __mask = _mm_add_epi32(allone, __mask);
     return _mm_castsi128_ps(_mm_and_si128(_mm_castps_si128(mem), __mask));
 }
+
+#ifdef __cplusplus
+}
+#endif

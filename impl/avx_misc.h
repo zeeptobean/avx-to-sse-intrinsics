@@ -1,5 +1,9 @@
 #include "../base.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**/
 
 int _mm256_movemask_pd(__m256d a) {
@@ -13,3 +17,7 @@ int _mm256_movemask_ps(__m256 a) {
     int hi = _mm_movemask_ps(a.hi);
     return (hi << 4) | lo;
 }
+
+#ifdef __cplusplus
+}
+#endif

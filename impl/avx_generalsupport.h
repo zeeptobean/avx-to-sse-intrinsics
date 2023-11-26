@@ -1,5 +1,9 @@
 #include <../base.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**/
 
 __m256d _mm256_undefined_pd(void) {
@@ -26,3 +30,7 @@ void _mm256_zeroall(void) {
 void _mm256_zeroupper(void) {
 
 }
+
+#ifdef __cplusplus
+}
+#endif
