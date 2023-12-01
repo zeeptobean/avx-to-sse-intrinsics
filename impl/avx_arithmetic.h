@@ -1,9 +1,5 @@
 #include <../base.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /**/
 
 __m256d _mm256_add_pd(__m256d a, __m256d b) {
@@ -116,14 +112,6 @@ __m256 _mm256_sub_ps(__m256 a, __m256 b) {
     return ret;
 }
 
-#ifdef __cplusplus
-}
-#endif
-
-///
-
-#ifdef __cplusplus
-
 #define _mm256_dp_ps(a, b, imm8) _mm256_dp_ps_cpp<imm8>(a, b)
 
 template<uint8_t imm8>
@@ -135,9 +123,7 @@ __m256 _mm256_dp_ps_cpp(__m256 a, __m256 b) {
 }
 
 
-#else
-
-__m256 _mm256_dp_ps(__m256 a, __m256 b, int imm8) {
+__m256 _mm256_dp_ps_nonconst(__m256 a, __m256 b, int imm8) {
     int calcmask = imm8 >> 4;
     int storemask = imm8 & 15;
 
@@ -184,7 +170,7 @@ __m256 _mm256_dp_ps(__m256 a, __m256 b, int imm8) {
  * Current implementation already optimized with cmovne on msvc or
  * aggressive simd-ing on clang-17, while gcc and older clang still branching...  
  * */
-__m256 _mm256_dp_ps_zp_impl2(__m256 a, __m256 b, int imm8) {
+__m256 _mm256_dp_ps_nonconst_zp_impl2(__m256 a, __m256 b, int imm8) {
     int calcmask = imm8 >> 4;
     int storemask = imm8 & 15;
 
@@ -225,5 +211,3 @@ __m256 _mm256_dp_ps_zp_impl2(__m256 a, __m256 b, int imm8) {
 
     return a;
 }
-
-#endif

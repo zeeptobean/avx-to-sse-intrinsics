@@ -1,9 +1,5 @@
 #include <../base.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /**/
 
 __m256 _mm256_rcp_ps(__m256 a) {
@@ -33,7 +29,3 @@ __m256 _mm256_sqrt_ps(__m256 a) {
     r.lo = _mm_sqrt_ps(a.lo);
     return r;
 }
-
-#ifdef __cplusplus
-}
-#endif

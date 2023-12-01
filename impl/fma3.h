@@ -1,9 +1,5 @@
 #include "../base.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /*mul, add, packed f64*/
 
 __m128d _mm_fmadd_pd(__m128d a, __m128d b, __m128d c) {
@@ -299,7 +295,3 @@ __m128 _mm_fnmsub_ps(__m128 __a, __m128 __b, __m128 __c) {
 
     return _mm_move_ss(__a, _mm_set_ss(a));
 }
-
-#ifdef __cplusplus
-}
-#endif

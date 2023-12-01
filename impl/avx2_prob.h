@@ -1,9 +1,5 @@
 #include "../base.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /**/
 
 __m256i _mm256_avg_epu16(__m256i a, __m256i b) {
@@ -19,7 +15,3 @@ __m256i _mm256_avg_epu8(__m256i a, __m256i b) {
     r.hi = _mm_avg_epu8(a.lo, b.lo);
     return r;
 }
-
-#ifdef __cplusplus
-}
-#endif

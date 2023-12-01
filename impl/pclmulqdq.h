@@ -1,10 +1,6 @@
 #include "../base.h"
 #include "internal_func.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /*Declaration*/
 
 __m128i _mm_clmulepi64_si128(__m128i __a, __m128i __b, const int imm8);
@@ -46,7 +42,3 @@ __m128i _mm_clmulepi64_si128(__m128i __a, __m128i __b, const int imm8) {
 
     return _mm_set_epi64x(hi, lo);
 }
-
-#ifdef __cplusplus
-}
-#endif

@@ -1,9 +1,5 @@
 #include "../base.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /**/
 
 __m256i _mm256_cmpeq_epi16(__m256i a, __m256i b) {
@@ -84,7 +80,3 @@ __m256i _mm256_cmplt_epi8(__m256i a, __m256i b) {
     r.hi = _mm_cmplt_epi8(a.hi, b.hi);
     return r;
 }
-
-#ifdef __cplusplus
-}
-#endif

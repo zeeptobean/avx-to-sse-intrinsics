@@ -2,10 +2,6 @@
 
 /*Funny type-punning functions*/
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /**/
 
 __m256 _mm256_castpd_ps(__m256d a) {
@@ -88,7 +84,3 @@ __m128 _mm256_castps256_ps128(__m256 a) {
 __m128i _mm256_castps256_ps128(__m256i a) {
     return a.lo;
 }
-
-#ifdef __cplusplus
-}
-#endif

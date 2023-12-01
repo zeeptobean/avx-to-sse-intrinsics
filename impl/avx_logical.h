@@ -1,9 +1,5 @@
 #include "../base.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /**/
 
 __m256d _mm256_and_pd(__m256d a, __m256d b) {
@@ -284,7 +280,3 @@ int _mm256_testnzc_si256(__m256i a, __m256i b) {
 
     return zf + cf == 0;
 }
-
-#ifdef __cplusplus
-}
-#endif

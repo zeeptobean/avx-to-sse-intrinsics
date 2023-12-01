@@ -1,9 +1,5 @@
 #include "../base.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /*int16 -> int32*/
 __m256i _mm256_cvtepi16_epi32(__m128i a) {
     __m256i r;
@@ -113,7 +109,3 @@ __m256i _mm256_cvtepu8_epi64(__m128i a) {
     r.hi = _mm_cvtepu8_epi64(hi);
     return r;
 }
-
-#ifdef __cplusplus
-}
-#endif

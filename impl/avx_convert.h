@@ -1,9 +1,5 @@
 #include "../base.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /*packed, int32 -> float32*/
 __m256 _mm256_cvtepi32_ps(__m256i a) {
     __m256 r;
@@ -93,7 +89,3 @@ float _mm256_cvtss_f32(__m256 a) {
 double _mm256_cvtsd_f64(__m256d a) {
     return _mm_cvtsd_f64(a.lo);
 }
-
-#ifdef __cplusplus
-}
-#endif

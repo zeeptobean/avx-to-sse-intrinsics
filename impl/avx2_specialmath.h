@@ -1,9 +1,5 @@
 #include "../base.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /**/
 
 __m256i _mm256_abs_epi16(__m256i a) {
@@ -118,7 +114,3 @@ __m256i _mm256_min_epu8(__m256i a, __m256i b) {
     r.hi = _mm_min_epu8(a.hi, b.hi);
     return r;
 }
-
-#ifdef __cplusplus
-}
-#endif
