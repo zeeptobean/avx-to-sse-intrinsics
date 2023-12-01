@@ -3,10 +3,6 @@
 
 /**/
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 __m256d _mm256_ceil_pd(__m256d a) {
     __m256d r;
     r.lo = _mm_ceil_pd(a.lo);
@@ -69,27 +65,24 @@ __m256 _mm256_min_ps(__m256 a, __m256 b) {
     return r;
 }
 
-#ifdef __cplusplus
-}
-#endif
-
 /**/
 
-#ifdef __cplusplus
 #define _mm256_round_pd(a, rounding) _mm256_round_pd_cpp<rounding>(a)
 
 #define _mm256_round_ps(a, rounding) _mm256_round_ps_cpp<rounding>(a)
 
-#else
-
-/*Not yet defined*/
-
-__m256d _mm256_round_pd(__m256d a, int rounding) {
-    
+template<int rounding>
+__m256d _mm256_round_pd_cpp(__m256d a) {
+    __m256d r;
+    r.lo = _mm_round_pd(a.lo, rounding);
+    r.hi = _mm_round_pd(a.hi, rounding);
+    return r;
 }
 
-__m256 _mm256_round_ps(__m256 a, int rounding) {
-    
+template<int rounding>
+__m256 _mm256_round_ps_cpp(__m256 a) {
+    __m256 r;
+    r.lo = _mm_round_ps(a.lo, rounding);
+    r.hi = _mm_round_ps(a.hi, rounding);
+    return r;
 }
-
-#endif
