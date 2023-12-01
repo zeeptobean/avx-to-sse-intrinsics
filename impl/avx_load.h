@@ -115,6 +115,8 @@ __m128d _mm_maskload_pd(double const *mem_addr, __m128i __mask) {
 
     if(mask[0] >> 63) a[0] = mem_addr[0];
     if(mask[1] >> 63) a[1] = mem_addr[1];
+
+    return _mm_loadu_pd(a);
 }
 
 __m256d _mm256_maskload_pd(double const *mem_addr, __m256i __mask) {
@@ -127,6 +129,11 @@ __m256d _mm256_maskload_pd(double const *mem_addr, __m256i __mask) {
     if(mask[1] >> 63) a[1] = mem_addr[1];
     if(mask[2] >> 63) a[2] = mem_addr[2];
     if(mask[3] >> 63) a[3] = mem_addr[3];
+
+    __m256d ret;
+    ret.lo = _mm_loadu_pd(a);
+    ret.hi = _mm_loadu_pd(a+2);
+    return ret;
 }
 
 __m128 _mm_maskload_ps(float const *mem_addr, __m128i __mask) {
@@ -139,6 +146,8 @@ __m128 _mm_maskload_ps(float const *mem_addr, __m128i __mask) {
     if(mask[1] >> 31) a[1] = mem_addr[1];
     if(mask[2] >> 31) a[2] = mem_addr[2];
     if(mask[3] >> 31) a[3] = mem_addr[3];
+
+    return _mm_loadu_ps(a);
 }
 
 __m256 _mm256_maskload_ps(float const *mem_addr, __m256i __mask) {
@@ -155,6 +164,11 @@ __m256 _mm256_maskload_ps(float const *mem_addr, __m256i __mask) {
     if(mask[5] >> 31) a[5] = mem_addr[5];
     if(mask[6] >> 31) a[6] = mem_addr[6];
     if(mask[7] >> 31) a[7] = mem_addr[7];
+
+    __m256 ret;
+    ret.lo = _mm_loadu_ps(a);
+    ret.hi = _mm_loadu_ps(a+4);
+    return ret;
 }
 
 /*Optional implementation*/

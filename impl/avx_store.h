@@ -104,7 +104,7 @@ void _mm256_maskstore_pd(double *mem_addr, __m256i __mask, __m256d __a) {
 }
 
 void _mm_maskstore_ps(float *mem_addr, __m128i __mask, __m128 __a) {
-    uint64_t mask[4];
+    uint32_t mask[4];
     float a[4];
     memcpy(mask, &__mask, sizeof(__mask));
     memcpy(a, &__a, sizeof(__a));
@@ -116,7 +116,7 @@ void _mm_maskstore_ps(float *mem_addr, __m128i __mask, __m128 __a) {
 }
 
 void _mm256_maskstore_ps(float *mem_addr, __m256i __mask, __m256 __a) {
-    uint64_t mask[8];
+    uint32_t mask[8];
     float a[8];
     memcpy(mask, &__mask, sizeof(__mask));
     memcpy(a, &__a, sizeof(__a));

@@ -15,7 +15,7 @@ __m256i _mm256_castpd_si256(__m256d a) {
     return *(__m256i*) &a;
 }
 
-__m256d _mm256_castpd_si256(__m256 a) {
+__m256d _mm256_castps_pd(__m256 a) {
     return *(__m256d*) &a;
 }
 
@@ -76,7 +76,7 @@ __m256i _mm256_zextsi128_si256(__m128i a) {
 
 /**/
 
-__m128d _mm256_castpd_si256(__m256d a) {
+__m128d _mm256_castpd256_pd128(__m256d a) {
     return a.lo;
 }
 
@@ -84,7 +84,7 @@ __m128 _mm256_castps256_ps128(__m256 a) {
     return a.lo;
 }
 
-__m128i _mm256_castps256_ps128(__m256i a) {
+__m128i _mm256_castsi256_si128(__m256i a) {
     return a.lo;
 }
 

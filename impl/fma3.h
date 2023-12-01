@@ -249,7 +249,7 @@ __m128 _mm_fmsub_ss(__m128 __a, __m128 __b, __m128 __c) {
 
 /*neg mul, add, scalar f64*/
 
-__m128d _mm_fnmadd_pd(__m128d __a, __m128d __b, __m128d __c) {
+__m128d _mm_fnmadd_sd(__m128d __a, __m128d __b, __m128d __c) {
     double a, b, c;
     a = _mm_cvtsd_f64(__a);
     b = _mm_cvtsd_f64(__b);
@@ -262,7 +262,7 @@ __m128d _mm_fnmadd_pd(__m128d __a, __m128d __b, __m128d __c) {
 
 /*neg mul, add, scalar f32*/
 
-__m128 _mm_fnmadd_ps(__m128 __a, __m128 __b, __m128 __c) {
+__m128 _mm_fnmadd_ss(__m128 __a, __m128 __b, __m128 __c) {
     float a, b, c;
     a = _mm_cvtss_f32(__a);
     b = _mm_cvtss_f32(__b);
@@ -275,7 +275,7 @@ __m128 _mm_fnmadd_ps(__m128 __a, __m128 __b, __m128 __c) {
 
 /*neg mul, sub, scalar f64*/
 
-__m128d _mm_fnmsub_pd(__m128d __a, __m128d __b, __m128d __c) {
+__m128d _mm_fnmsub_sd(__m128d __a, __m128d __b, __m128d __c) {
     double a, b, c;
     a = _mm_cvtsd_f64(__a);
     b = _mm_cvtsd_f64(__b);
@@ -288,7 +288,7 @@ __m128d _mm_fnmsub_pd(__m128d __a, __m128d __b, __m128d __c) {
 
 /*neg mul, sub, scalar f32*/
 
-__m128 _mm_fnmsub_ps(__m128 __a, __m128 __b, __m128 __c) {
+__m128 _mm_fnmsub_ss(__m128 __a, __m128 __b, __m128 __c) {
     float a, b, c;
     a = _mm_cvtss_f32(__a);
     b = _mm_cvtss_f32(__b);

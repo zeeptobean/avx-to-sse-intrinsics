@@ -60,21 +60,16 @@ __m256d _mm256_cvtps_pd(__m128 a) {
 }
 
 /*packed, truncation, float64 -> int32*/
-__m128i _mm256_cvtpd_epi32(__m256d a) {
-    __m128i lo = _mm_cvttpd_epi32(a.lo);
-    __m128i hi = _mm_cvttpd_epi32(a.hi);
-    //duplicate low part to high part of hi register
-    hi = _mm_castpd_si128(_mm_movedup_pd(_mm_castsi128_pd(hi)));
-    //Shuffle between two registers for returns
-    return _mm_castps_si128(_mm_shuffle_ps(_mm_castsi128_ps(lo), _mm_castsi128_ps(hi), 0b01000100));
-    // return _mm_castps_si128(_mm_blend_ps(_mm_castsi128_ps(lo), _mm_castsi128_ps(hi), 0b1100));   //same code
+__m128i _mm256_cvttpd_epi32(__m256d a) {
+    //not actually implemented
+    __m128i r;
+    return r;
 }
 
 /*packed, truncation, float32 -> int32*/
-__m256i _mm256_cvtpd_epi32(__m256 a) {
+__m256i _mm256_cvttpd_epi32(__m256 a) {
+    //not actually implemented
     __m256i r;
-    r.lo = _mm_cvttps_epi32(a.lo);
-    r.hi = _mm_cvttps_epi32(a.hi);
     return r;
 }
 

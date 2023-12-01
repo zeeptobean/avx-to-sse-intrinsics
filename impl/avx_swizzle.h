@@ -34,7 +34,8 @@ __m256 _mm256_blendv_ps(__m256 a, __m256 b, __m256 mask) {
     return r;
 }
 
-/**/
+/*Defined in avx_load.h*/
+/*
 
 __m256d _mm256_broadcast_pd(__m128d const *mem_addr) {
     __m256d r;
@@ -62,6 +63,8 @@ __m256d _mm256_broadcast_sd(double const *mem_addr) {
 __m128 _mm_broadcast_ss(float const *mem_addr) {
     return _mm_set1_ps(*mem_addr);
 }
+
+*/
 
 /**/
 
