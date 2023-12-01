@@ -1,3 +1,6 @@
+#ifndef zp_avx_swizzle_incl
+#define zp_avx_swizzle_incl
+
 #include "../base.h"
 #include "avx_cast.h"
 
@@ -224,7 +227,7 @@ __m256 _mm256_permute2f128_ps(__m256 a, __m256 b, int imm8) {
 __m128d _mm_permutevar_pd(__m128d a, __m128i b) {
     int64_t imm[2];
     double f[2], ret[2];
-    _mm_store_pd((__m128d*) f, a);
+    _mm_store_pd((double*) f, a);
     _mm_store_si128((__m128i*) imm, b);
     memcpy(ret, f, sizeof f);
 
@@ -248,7 +251,7 @@ __m256d _mm256_permutevar_pd(__m256d a, __m256i b) {
 __m128 _mm_permutevar_ps(__m128 a, __m128i b) {
     int32_t imm[4];
     float f[4], ret[4];
-    _mm_store_ps((__m128*) f, a);
+    _mm_store_ps((float*) f, a);
     _mm_store_si128((__m128i*) imm, b);
 
     for(int i=0; i < 4; i++)   //could be unrolled
@@ -321,10 +324,10 @@ __m256 _mm256_shuffle_ps_zp_impl2(__m256 __a, __m256 __b, const int __imm8) {
     __m256 r;
     int imm8 = __imm8;
     float a[8], b[8], ret[8];
-    _mm_store_ps((__m128*) a, __a.lo);
-    _mm_store_ps((__m128*) a+4, __a.hi);
-    _mm_store_ps((__m128*) b, __b.lo);
-    _mm_store_ps((__m128*) b+4, __b.hi);
+    _mm_store_ps((float*) a, __a.lo);
+    _mm_store_ps((float*) a+4, __a.hi);
+    _mm_store_ps((float*) b, __b.lo);
+    _mm_store_ps((float*) b+4, __b.hi);
 
     switch(imm8 & 3) {
         case 0: ret[0] = a[0]; break; 
@@ -387,3 +390,5 @@ __m256 _mm256_shuffle_ps_zp_impl2(__m256 __a, __m256 __b, const int __imm8) {
     r.hi = _mm_loadu_ps(ret+4);
     return r;
 }
+
+#endif

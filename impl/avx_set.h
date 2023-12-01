@@ -1,4 +1,7 @@
-#include <base.h>
+#ifndef zp_avx_set_incl
+#define zp_avx_set_incl
+
+#include "../base.h"
 
 /**/
 
@@ -207,3 +210,5 @@ __m256 _mm256_set1_ps(float a) {
     r.lo = _mm_set1_ps(a);
     return r;
 }
+
+#endif

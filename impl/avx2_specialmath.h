@@ -1,3 +1,6 @@
+#ifndef zp_avx2_specialmath_incl
+#define zp_avx2_specialmath_incl
+
 #include "../base.h"
 
 /**/
@@ -114,3 +117,5 @@ __m256i _mm256_min_epu8(__m256i a, __m256i b) {
     r.hi = _mm_min_epu8(a.hi, b.hi);
     return r;
 }
+
+#endif

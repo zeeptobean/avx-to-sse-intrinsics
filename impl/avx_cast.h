@@ -1,4 +1,7 @@
-#include <../base.h>
+#ifndef zp_avx_cast_incl
+#define zp_avx_cast_incl
+
+#include "../base.h"
 
 /*Funny type-punning functions*/
 
@@ -84,3 +87,5 @@ __m128 _mm256_castps256_ps128(__m256 a) {
 __m128i _mm256_castps256_ps128(__m256i a) {
     return a.lo;
 }
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef zp_avx2_arithmetic_incl
+#define zp_avx2_arithmetic_incl
+
 #include "../base.h"
 
 /**/
@@ -260,3 +263,5 @@ __m256i _mm256_subs_epu8(__m256i a, __m256i b) {
     r.hi = _mm_subs_epu8(a.hi, b.hi);
     return r;
 }
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef zp_avx_convert_incl
+#define zp_avx_convert_incl
+
 #include "../base.h"
 
 /*packed, int32 -> float32*/
@@ -89,3 +92,5 @@ float _mm256_cvtss_f32(__m256 a) {
 double _mm256_cvtsd_f64(__m256d a) {
     return _mm_cvtsd_f64(a.lo);
 }
+
+#endif

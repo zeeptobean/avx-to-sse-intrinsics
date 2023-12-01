@@ -1,5 +1,8 @@
+#ifndef zp_pclmulqdq_incl
+#define zp_pclmulqdq_incl
+
 #include "../base.h"
-#include "internal_func.h"
+#include "../internal_func.h"
 
 /*Declaration*/
 
@@ -42,3 +45,5 @@ __m128i _mm_clmulepi64_si128(__m128i __a, __m128i __b, const int imm8) {
 
     return _mm_set_epi64x(hi, lo);
 }
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef zp_avx2_convert_incl
+#define zp_avx2_convert_incl
+
 #include "../base.h"
 
 /*int16 -> int32*/
@@ -109,3 +112,5 @@ __m256i _mm256_cvtepu8_epi64(__m128i a) {
     r.hi = _mm_cvtepu8_epi64(hi);
     return r;
 }
+
+#endif

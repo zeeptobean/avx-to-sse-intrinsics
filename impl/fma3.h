@@ -1,3 +1,6 @@
+#ifndef zp_fma3_incl
+#define zp_fma3_incl
+
 #include "../base.h"
 
 /*mul, add, packed f64*/
@@ -295,3 +298,5 @@ __m128 _mm_fnmsub_ps(__m128 __a, __m128 __b, __m128 __c) {
 
     return _mm_move_ss(__a, _mm_set_ss(a));
 }
+
+#endif

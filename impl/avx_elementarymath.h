@@ -1,4 +1,7 @@
-#include <../base.h>
+#ifndef zp_avx_elementarymath_incl
+#define zp_avx_elementarymath_incl
+
+#include "../base.h"
 
 /**/
 
@@ -29,3 +32,5 @@ __m256 _mm256_sqrt_ps(__m256 a) {
     r.lo = _mm_sqrt_ps(a.lo);
     return r;
 }
+
+#endif

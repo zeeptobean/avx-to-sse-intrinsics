@@ -1,3 +1,6 @@
+#ifndef zp_avx2_logical_incl
+#define zp_avx2_logical_incl
+
 #include "../base.h"
 
 /**/
@@ -29,3 +32,5 @@ __m256i _mm256_xor_si128(__m256i a, __m256i b) {
     r.hi = _mm_xor_si128(a.hi, b.hi);
     return r;
 }
+
+#endif

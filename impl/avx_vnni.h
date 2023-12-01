@@ -1,3 +1,6 @@
+#ifndef zp_avx_arithmetic_incl
+#define zp_avx_arithmetic_incl
+
 #include "../base.h"
 #include "../internal_func.h"
 
@@ -439,3 +442,5 @@ __m128i _mm_dpwssd_epi32_zp_impl2(__m128i src, __m128i a, __m128i b) {
     a = _mm_add_epi32(a, src);
     return a;
 }
+
+#endif

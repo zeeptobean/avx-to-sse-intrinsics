@@ -1,4 +1,7 @@
-#include "base.h"
+#ifndef zp_avx_store_incl
+#define zp_avx_store_incl
+
+#include "../base.h"
 
 /**/
 
@@ -127,3 +130,5 @@ void _mm256_maskstore_ps(float *mem_addr, __m256i __mask, __m256 __a) {
     if(mask[6] >> 31) mem_addr[6] = a[6];
     if(mask[7] >> 31) mem_addr[7] = a[7];
 }
+
+#endif

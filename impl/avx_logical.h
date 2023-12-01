@@ -1,3 +1,6 @@
+#ifndef zp_avx_logical_incl
+#define zp_avx_logical_incl
+
 #include "../base.h"
 
 /**/
@@ -280,3 +283,5 @@ int _mm256_testnzc_si256(__m256i a, __m256i b) {
 
     return zf + cf == 0;
 }
+
+#endif

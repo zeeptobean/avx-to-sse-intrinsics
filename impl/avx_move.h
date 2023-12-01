@@ -1,4 +1,7 @@
-#include "base.h"
+#ifndef zp_avx_move_incl
+#define zp_avx_move_incl
+
+#include "../base.h"
 
 /**/
 
@@ -20,3 +23,5 @@ __m256 _mm256_moveldup_ps(__m256 a) {
     r.hi = _mm_moveldup_ps(a.hi);
     r.lo = _mm_moveldup_ps(a.lo);
 }
+
+#endif

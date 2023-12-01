@@ -1,4 +1,7 @@
-#include <../base.h>
+#ifndef zp_avx_arithmetic_incl
+#define zp_avx_arithmetic_incl
+
+#include "../base.h"
 
 /**/
 
@@ -211,3 +214,5 @@ __m256 _mm256_dp_ps_nonconst_zp_impl2(__m256 a, __m256 b, int imm8) {
 
     return a;
 }
+
+#endif

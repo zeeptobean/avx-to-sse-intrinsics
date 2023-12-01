@@ -1,4 +1,7 @@
-#include <../base.h>
+#ifndef zp_avx_generalsupport_incl
+#define zp_avx_generalsupport_incl
+
+#include "../base.h"
 
 /**/
 
@@ -26,3 +29,5 @@ void _mm256_zeroall(void) {
 void _mm256_zeroupper(void) {
 
 }
+
+#endif

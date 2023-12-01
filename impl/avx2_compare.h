@@ -1,3 +1,6 @@
+#ifndef zp_avx2_compare_incl
+#define zp_avx2_compare_incl
+
 #include "../base.h"
 
 /**/
@@ -80,3 +83,5 @@ __m256i _mm256_cmplt_epi8(__m256i a, __m256i b) {
     r.hi = _mm_cmplt_epi8(a.hi, b.hi);
     return r;
 }
+
+#endif

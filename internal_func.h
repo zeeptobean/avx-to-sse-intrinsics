@@ -1,4 +1,7 @@
-#include <base.h>
+#ifndef zp_internal_func_incl
+#define zp_internal_func_incl
+
+#include "base.h"
 
 void zp_internal_umul128(uint64_t x, uint64_t y, uint64_t *lo, uint64_t *hi) {
 #ifdef _MSC_VER 
@@ -42,3 +45,5 @@ __m128i zp_internal_paddsd(__m128i a, __m128i b) {
                                           )
                             );
 }
+
+#endif

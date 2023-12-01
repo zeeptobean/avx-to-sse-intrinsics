@@ -1,3 +1,6 @@
+#ifndef zp_avx_specialmath_incl
+#define zp_avx_specialmath_incl
+
 #include "../base.h"
 #include "internal_avx_specialmath.hpp"
 
@@ -86,3 +89,5 @@ __m256 _mm256_round_ps_cpp(__m256 a) {
     r.hi = _mm_round_ps(a.hi, rounding);
     return r;
 }
+
+#endif

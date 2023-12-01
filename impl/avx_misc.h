@@ -1,3 +1,6 @@
+#ifndef zp_avx_misc_incl
+#define zp_avx_misc_incl
+
 #include "../base.h"
 
 /**/
@@ -13,3 +16,5 @@ int _mm256_movemask_ps(__m256 a) {
     int hi = _mm_movemask_ps(a.hi);
     return (hi << 4) | lo;
 }
+
+#endif

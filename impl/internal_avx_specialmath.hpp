@@ -1,6 +1,7 @@
-#include "../base.h"
+#ifndef zp_internal_avx_specialmath_incl
+#define zp_internal_avx_specialmath_incl
 
-#ifdef __cplusplus
+#include "../base.h"
 
 template <uint8_t rounding>
 __m256d _mm256_round_pd_cpp(__m256d a) {
