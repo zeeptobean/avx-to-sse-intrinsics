@@ -1,5 +1,5 @@
-#ifndef zp_avx_arithmetic_incl
-#define zp_avx_arithmetic_incl
+#ifndef zp_avx_vnni_incl
+#define zp_avx_vnni_incl
 
 #include "../base.h"
 #include "../internal_func.h"
