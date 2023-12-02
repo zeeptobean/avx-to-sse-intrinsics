@@ -6,14 +6,19 @@
 
 /**/
 
-__m256d _mm256_blend_pd(__m256d a, __m256d b, const int imm8) {
+#define _mm256_blend_pd(a, b, imm8) _mm256_blend_pd_cpp<imm8>(a, b);
+#define _mm256_blend_ps(a, b, imm8) _mm256_blend_ps_cpp<imm8>(a, b);
+
+template <uint32_t imm8>
+__m256d _mm256_blend_pd_cpp(__m256d a, __m256d b) {
     __m256d r;
     r.lo = _mm_blend_pd(a.lo, b.lo, imm8);
     r.hi = _mm_blend_pd(a.lo, b.lo, imm8 >> 2);
     return r;
 }
 
-__m256 _mm256_blend_ps(__m256 a, __m256 b, const int imm8) {
+template <uint32_t imm8>
+__m256 _mm256_blend_ps_cpp(__m256 a, __m256 b) {
     __m256 r;
     r.lo = _mm_blend_ps(a.lo, b.lo, imm8);
     r.hi = _mm_blend_ps(a.lo, b.lo, imm8 >> 2);
@@ -68,13 +73,18 @@ __m128 _mm_broadcast_ss(float const *mem_addr) {
 
 /**/
 
-int _mm256_extract_epi32(__m256i a, const int index) {
+#define _mm256_extract_epi32(a, index) _mm256_extract_epi32_cpp<index>(a);
+#define _mm256_extract_epi64(a, index) _mm256_extract_epi64_cpp<index>(a);
+
+template <uint32_t index>
+int _mm256_extract_epi32_cpp(__m256i a) {
     if( (index >> 2) & 1 ) {    //upper
         return _mm_extract_epi32(a.hi, index & 3);
     } else return _mm_extract_epi32(a.lo, index);
 }
 
-int64_t _mm256_extract_epi64(__m256i a, const int index) {
+template <uint32_t index>
+int64_t _mm256_extract_epi64_cpp(__m256i a) {
     if( (index >> 1) & 1 ) {    //upper
         return _mm_extract_epi32(a.hi, index & 1);
     } else return _mm_extract_epi32(a.lo, index);
@@ -82,19 +92,26 @@ int64_t _mm256_extract_epi64(__m256i a, const int index) {
 
 /**/
 
-__m128d _mm256_extractf128_pd(__m256d a, const int imm8) {
+#define _mm256_extractf128_pd(a, index) _mm256_extractf128_pd_cpp<index>(a);
+#define _mm256_extractf128_ps(a, index) _mm256_extractf128_ps_cpp<index>(a);
+#define _mm256_extractf128_si256(a, index) _mm256_extractf128_si256_cpp<index>(a);
+
+template <uint32_t imm8>
+__m128d _mm256_extractf128_pd_cpp(__m256d a) {
     if(imm8 & 1) {
         return a.hi;
     } else return a.lo;
 }
 
-__m128 _mm256_extractf128_ps(__m256 a, const int imm8) {
+template <uint32_t imm8>
+__m128 _mm256_extractf128_ps_cpp(__m256 a) {
     if(imm8 & 1) {
         return a.hi;
     } else return a.lo;
 }
 
-__m128i _mm256_extractf128_si256 (__m256i a, const int imm8) {
+template <uint32_t imm8>
+__m128i _mm256_extractf128_si256_cpp(__m256i a) {
     if(imm8 & 1) {
         return a.hi;
     } else return a.lo;
@@ -102,7 +119,13 @@ __m128i _mm256_extractf128_si256 (__m256i a, const int imm8) {
 
 /**/
 
-__m256i _mm256_insert_epi8(__m256i a, int8_t i, const int index) {
+#define _mm256_insert_epi8(a, i, index) _mm256_insert_epi8_cpp<index>(a, i);
+#define _mm256_insert_epi16(a, i, index) _mm256_insert_epi16_cpp<index>(a, i);
+#define _mm256_insert_epi32(a, i, index) _mm256_insert_epi32_cpp<index>(a, i);
+#define _mm256_insert_epi64(a, i, index) _mm256_insert_epi64_cpp<index>(a, i);
+
+template <uint32_t index>
+__m256i _mm256_insert_epi8_cpp(__m256i a, int8_t i) {
     if( (index >> 4) & 1 ) {    //upper
         a.hi = _mm_insert_epi16(a.hi, i, index & 15);
     } else {
@@ -111,7 +134,8 @@ __m256i _mm256_insert_epi8(__m256i a, int8_t i, const int index) {
     return a;
 }
 
-__m256i _mm256_insert_epi16(__m256i a, int16_t i, const int index) {
+template <uint32_t index>
+__m256i _mm256_insert_epi16_cpp(__m256i a, int16_t i) {
     if( (index >> 3) & 1 ) {    //upper
         a.hi = _mm_insert_epi16(a.hi, i, index & 7);
     } else {
@@ -120,7 +144,8 @@ __m256i _mm256_insert_epi16(__m256i a, int16_t i, const int index) {
     return a;
 }
 
-__m256i _mm256_insert_epi32 (__m256i a, int32_t i, const int index) {
+template <uint32_t index>
+__m256i _mm256_insert_epi32_cpp (__m256i a, int32_t i) {
     if( (index >> 2) & 1 ) {    //upper
         a.hi = _mm_insert_epi16(a.hi, i, index & 3);
     } else {
@@ -129,7 +154,8 @@ __m256i _mm256_insert_epi32 (__m256i a, int32_t i, const int index) {
     return a;
 }
 
-__m256i _mm256_insert_epi64 (__m256i a, int64_t i, const int index) {
+template <uint32_t index>
+__m256i _mm256_insert_epi64_cpp (__m256i a, int64_t i) {
     if( (index >> 1) & 1 ) {    //upper
         a.hi = _mm_insert_epi16(a.hi, i, index & 1);
     } else {
@@ -140,21 +166,28 @@ __m256i _mm256_insert_epi64 (__m256i a, int64_t i, const int index) {
 
 /**/
 
-__m256d _mm256_insertf128_pd(__m256d a, __m128d b, int imm8) {
+#define _mm256_insertf128_pd(a, b, imm8) _mm256_insertf128_pd_cpp<imm8>(a, b);
+#define _mm256_insertf128_ps(a, b, imm8) _mm256_insertf128_ps_cpp<imm8>(a, b);
+#define _mm256_insertf128_si256(a, b, imm8) _mm256_insertf128_si256_cpp<imm8>(a, b);
+
+template <uint32_t imm8>
+__m256d _mm256_insertf128_pd_cpp(__m256d a, __m128d b) {
     if(imm8 & 1) {
         a.hi = b;
     } else a.lo = b;
     return a;
 }
 
-__m256 _mm256_insertf128_ps(__m256 a, __m128 b, int imm8) {
+template <uint32_t imm8>
+__m256 _mm256_insertf128_ps_cpp(__m256 a, __m128 b) {
     if(imm8 & 1) {
         a.hi = b;
     } else a.lo = b;
     return a;
 }
 
-__m256i _mm256_insertf128_si256(__m256i a, __m128i b, int imm8) {
+template <uint32_t imm8>
+__m256i _mm256_insertf128_si256_cpp(__m256i a, __m128i b) {
     if(imm8 & 1) {
         a.hi = b;
     } else a.lo = b;
@@ -163,22 +196,31 @@ __m256i _mm256_insertf128_si256(__m256i a, __m128i b, int imm8) {
 
 /**/
 
-__m128d _mm_permute_pd(__m128d a, int imm8) {
+#define _mm_permute_pd(a, imm8) _mm_permute_pd_cpp<imm8>(a);
+#define _mm_permute_ps(a, imm8) _mm_permute_ps_cpp<imm8>(a);
+#define _mm256_permute_pd(a, imm8) _mm256_permute_pd_cpp<imm8>(a);
+#define _mm256_permute_ps(a, imm8) _mm256_permute_ps_cpp<imm8>(a);
+
+template <uint32_t imm8>
+__m128d _mm_permute_pd_cpp(__m128d a) {
     return _mm_shuffle_pd(a, a, imm8); 
 }
 
-__m128 _mm_permute_ps(__m128 a, int imm8) {
+template <uint32_t imm8>
+__m128 _mm_permute_ps_cpp(__m128 a) {
     return _mm_shuffle_ps(a, a, imm8); 
 }
 
-__m256d _mm256_permute_pd(__m256d a, int imm8) {
+template <uint32_t imm8>
+__m256d _mm256_permute_pd_cpp(__m256d a) {
     __m256d r;
     r.lo = _mm_permute_pd(a.lo, imm8);
     r.hi = _mm_permute_pd(a.lo, imm8 >> 2);
     return r;
 }
 
-__m256 _mm256_permute_ps(__m256 a, int imm8) {
+template <uint32_t imm8>
+__m256 _mm256_permute_ps_cpp(__m256 a) {
     __m256 r;
     r.lo = _mm_permute_ps(a.lo, imm8);
     r.hi = _mm_permute_ps(a.lo, imm8 >> 4);
@@ -277,14 +319,19 @@ __m256 _mm256_permutevar_ps(__m256 a, __m256i b) {
 
 /**/
 
-__m256d _mm256_shuffle_pd(__m256d a, __m256d b, const int imm8) {
+#define _mm256_shuffle_pd(a, b, imm8) _mm256_shuffle_pd_cpp<imm8>(a, b);
+#define _mm256_shuffle_ps(a, b, imm8) _mm256_shuffle_ps_cpp<imm8>(a, b);
+
+template <uint32_t imm8>
+__m256d _mm256_shuffle_pd_cpp(__m256d a, __m256d b) {
     __m256d r;
     r.lo = _mm_shuffle_pd(a.lo, b.lo, imm8);
     r.hi = _mm_shuffle_pd(a.hi, b.hi, imm8 >> 2);
     return r;
 }
 
-__m256 _mm256_shuffle_ps(__m256 a, __m256 b, const int imm8) {
+template <uint32_t imm8>
+__m256 _mm256_shuffle_ps_cpp(__m256 a, __m256 b) {
     __m256 r;
     r.lo = _mm_shuffle_ps(a.lo, b.lo, imm8);
     r.hi = _mm_shuffle_ps(a.hi, b.hi, imm8 >> 4);
@@ -323,9 +370,11 @@ __m256 _mm256_unpacklo_ps(__m256 a, __m256 b) {
 
 /*Optional implementation*/
 
-__m256 _mm256_shuffle_ps_zp_impl2(__m256 __a, __m256 __b, const int __imm8) {
+#define _mm256_shuffle_ps_zp_impl2(a, b, imm8) _mm256_shuffle_ps_cpp_zp_impl2<imm8>(a, b);
+
+template <uint32_t imm8>
+__m256 _mm256_shuffle_ps_cpp_zp_impl2(__m256 __a, __m256 __b) {
     __m256 r;
-    int imm8 = __imm8;
     float a[8], b[8], ret[8];
     _mm_store_ps((float*) a, __a.lo);
     _mm_store_ps((float*) a+4, __a.hi);
@@ -338,56 +387,48 @@ __m256 _mm256_shuffle_ps_zp_impl2(__m256 __a, __m256 __b, const int __imm8) {
         case 2: ret[0] = a[2]; break; 
         case 3: ret[0] = a[3]; break; 
     }
-    imm8 >>= 2;
-    switch(imm8 & 3) {
+    switch((imm8 >> 2) & 3) {
         case 0: ret[1] = a[0]; break; 
         case 1: ret[1] = a[1]; break; 
         case 2: ret[1] = a[2]; break; 
         case 3: ret[1] = a[3]; break; 
     }
-    imm8 >>= 2;
-    switch(imm8 & 3) {
+    switch((imm8 >> 4) & 3) {
         case 0: ret[2] = b[0]; break; 
         case 1: ret[2] = b[1]; break; 
         case 2: ret[2] = b[2]; break; 
         case 3: ret[2] = b[3]; break; 
     }
-    imm8 >>= 2;
-    switch(imm8 & 3) {
+    switch((imm8 >> 6)  & 3) {
         case 0: ret[3] = b[0]; break; 
         case 1: ret[3] = b[1]; break; 
         case 2: ret[3] = b[2]; break; 
         case 3: ret[3] = b[3]; break;  
     }
-    imm8 >>= 2;
-    switch(imm8 & 3) {
+    switch((imm8 >> 8) & 3) {
         case 0: ret[4] = a[4]; break; 
         case 1: ret[4] = a[5]; break; 
         case 2: ret[4] = a[6]; break; 
         case 3: ret[4] = a[7]; break; 
     }
-    imm8 >>= 2;
-    switch(imm8 & 3) {
+    switch((imm8 >> 10) & 3) {
         case 0: ret[5] = a[4]; break; 
         case 1: ret[5] = a[5]; break; 
         case 2: ret[5] = a[6]; break; 
         case 3: ret[5] = a[7]; break; 
     }
-    imm8 >>= 2;
-    switch(imm8 & 3) {
+    switch((imm8 >> 12) & 3) {
         case 0: ret[6] = b[4]; break; 
         case 1: ret[6] = b[5]; break; 
         case 2: ret[6] = b[6]; break; 
         case 3: ret[6] = b[7]; break; 
     }
-    imm8 >>= 2;
-    switch(imm8 & 3) {
+    switch((imm8 >> 14) & 3) {
         case 0: ret[7] = b[4]; break; 
         case 1: ret[7] = b[5]; break; 
         case 2: ret[7] = b[6]; break; 
         case 3: ret[7] = b[7]; break; 
     }
-    imm8 >>= 2;
     
     r.lo = _mm_loadu_ps(ret);
     r.hi = _mm_loadu_ps(ret+4);
