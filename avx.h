@@ -21,6 +21,7 @@
 #include "impl/avx2_convert.h"
 #include "impl/avx2_logical.h"
 #include "impl/avx2_prob.h"
+#include "impl/avx2_shift.h"
 #include "impl/avx2_specialmath.h"
 #include "impl/fma3.h"
 #include "impl/pclmulqdq.h"
