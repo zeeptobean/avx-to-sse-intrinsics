@@ -2,7 +2,6 @@
 #define zp_avx_specialmath_incl
 
 #include "../base.h"
-#include "internal_avx_specialmath.hpp"
 
 /**/
 
