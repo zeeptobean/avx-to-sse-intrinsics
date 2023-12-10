@@ -3,31 +3,33 @@
 
 #include "../base.h"
 
+namespace zp {
+
 /**/
 
-__m256i _mm256_cmpeq_epi16(__m256i a, __m256i b) {
-    __m256i r;
+zp::__m256i _mm256_cmpeq_epi16(zp::__m256i a, zp::__m256i b) {
+    zp::__m256i r;
     r.lo = _mm_cmpeq_epi16(a.lo, b.lo);
     r.hi = _mm_cmpeq_epi16(a.hi, b.hi);
     return r;
 }
 
-__m256i _mm256_cmpeq_epi32(__m256i a, __m256i b) {
-    __m256i r;
+zp::__m256i _mm256_cmpeq_epi32(zp::__m256i a, zp::__m256i b) {
+    zp::__m256i r;
     r.lo = _mm_cmpeq_epi32(a.lo, b.lo);
     r.hi = _mm_cmpeq_epi32(a.hi, b.hi);
     return r;
 }
 
-__m256i _mm256_cmpeq_epi64(__m256i a, __m256i b) {
-    __m256i r;
+zp::__m256i _mm256_cmpeq_epi64(zp::__m256i a, zp::__m256i b) {
+    zp::__m256i r;
     r.lo = _mm_cmpeq_epi64(a.lo, b.lo);
     r.hi = _mm_cmpeq_epi64(a.hi, b.hi);
     return r;
 }
 
-__m256i _mm256_cmpeq_epi8(__m256i a, __m256i b) {
-    __m256i r;
+zp::__m256i _mm256_cmpeq_epi8(zp::__m256i a, zp::__m256i b) {
+    zp::__m256i r;
     r.lo = _mm_cmpeq_epi8(a.lo, b.lo);
     r.hi = _mm_cmpeq_epi8(a.hi, b.hi);
     return r;
@@ -36,22 +38,22 @@ __m256i _mm256_cmpeq_epi8(__m256i a, __m256i b) {
 /**/
 
 
-__m256i _mm256_cmplt_epi16(__m256i a, __m256i b) {
-    __m256i r;
+zp::__m256i _mm256_cmplt_epi16(zp::__m256i a, zp::__m256i b) {
+    zp::__m256i r;
     r.lo = _mm_cmplt_epi16(a.lo, b.lo);
     r.hi = _mm_cmplt_epi16(a.hi, b.hi);
     return r;
 }
 
-__m256i _mm256_cmplt_epi32(__m256i a, __m256i b) {
-    __m256i r;
+zp::__m256i _mm256_cmplt_epi32(zp::__m256i a, zp::__m256i b) {
+    zp::__m256i r;
     r.lo = _mm_cmplt_epi32(a.lo, b.lo);
     r.hi = _mm_cmplt_epi32(a.hi, b.hi);
     return r;
 }
 
-__m256i _mm256_cmplt_epi64(__m256i a, __m256i b) {
-    __m256i r;
+zp::__m256i _mm256_cmplt_epi64(zp::__m256i a, zp::__m256i b) {
+    zp::__m256i r;
     int arr[4];
 
     r.lo = _mm_cmplt_epi32(a.lo, b.lo);
@@ -77,11 +79,13 @@ __m256i _mm256_cmplt_epi64(__m256i a, __m256i b) {
     return r;
 }
 
-__m256i _mm256_cmplt_epi8(__m256i a, __m256i b) {
-    __m256i r;
+zp::__m256i _mm256_cmplt_epi8(zp::__m256i a, zp::__m256i b) {
+    zp::__m256i r;
     r.lo = _mm_cmplt_epi8(a.lo, b.lo);
     r.hi = _mm_cmplt_epi8(a.hi, b.hi);
     return r;
+}
+
 }
 
 #endif

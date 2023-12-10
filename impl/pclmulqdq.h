@@ -4,15 +4,17 @@
 #include "../base.h"
 #include "../internal_func.h"
 
+namespace zp {
+
 /*Declaration*/
 
 __m128i _mm_clmulepi64_si128(__m128i __a, __m128i __b, const int imm8);
-__m256i _mm256_clmulepi64_epi128(__m256i __a, __m256i __b, const int imm8);
+zp::__m256i _mm256_clmulepi64_epi128(zp::__m256i __a, zp::__m256i __b, const int imm8);
 
 /*Implementation*/
 
-__m256i _mm256_clmulepi64_epi128(__m256i __a, __m256i __b, const int imm8) {
-    __m256i r;
+zp::__m256i _mm256_clmulepi64_epi128(zp::__m256i __a, zp::__m256i __b, const int imm8) {
+    zp::__m256i r;
     r.lo = _mm_clmulepi64_si128(__a.lo, __b.lo, imm8);
     r.hi = _mm_clmulepi64_si128(__a.hi, __b.hi, imm8);
     return r;
@@ -44,6 +46,8 @@ __m128i _mm_clmulepi64_si128(__m128i __a, __m128i __b, const int imm8) {
     hi ^= (tmp >> 32);
 
     return _mm_set_epi64x(hi, lo);
+}
+
 }
 
 #endif

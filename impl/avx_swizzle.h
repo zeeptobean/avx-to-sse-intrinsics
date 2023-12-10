@@ -4,36 +4,40 @@
 #include "../base.h"
 #include "avx_cast.h"
 
+namespace zp {
+
 /**/
 
+#ifndef zeept_disable_marco_function
 #define _mm256_blend_pd(a, b, imm8) _mm256_blend_pd_cpp<imm8>(a, b);
 #define _mm256_blend_ps(a, b, imm8) _mm256_blend_ps_cpp<imm8>(a, b);
+#endif
 
 template <uint32_t imm8>
-__m256d _mm256_blend_pd_cpp(__m256d a, __m256d b) {
-    __m256d r;
+zp::__m256d _mm256_blend_pd_cpp(zp::__m256d a, zp::__m256d b) {
+    zp::__m256d r;
     r.lo = _mm_blend_pd(a.lo, b.lo, imm8);
     r.hi = _mm_blend_pd(a.lo, b.lo, imm8 >> 2);
     return r;
 }
 
 template <uint32_t imm8>
-__m256 _mm256_blend_ps_cpp(__m256 a, __m256 b) {
-    __m256 r;
+zp::__m256 _mm256_blend_ps_cpp(zp::__m256 a, zp::__m256 b) {
+    zp::__m256 r;
     r.lo = _mm_blend_ps(a.lo, b.lo, imm8);
     r.hi = _mm_blend_ps(a.lo, b.lo, imm8 >> 2);
     return r;
 }
 
-__m256d _mm256_blendv_pd(__m256d a, __m256d b, __m256d mask) {
-    __m256d r;
+zp::__m256d _mm256_blendv_pd(zp::__m256d a, zp::__m256d b, zp::__m256d mask) {
+    zp::__m256d r;
     r.lo = _mm_blendv_pd(a.lo, b.lo, mask.lo);
     r.hi = _mm_blendv_pd(a.hi, b.hi, mask.lo);
     return r;
 }
 
-__m256 _mm256_blendv_ps(__m256 a, __m256 b, __m256 mask) {
-    __m256 r;
+zp::__m256 _mm256_blendv_ps(zp::__m256 a, zp::__m256 b, zp::__m256 mask) {
+    zp::__m256 r;
     r.lo = _mm_blendv_ps(a.lo, b.lo, mask.lo);
     r.hi = _mm_blendv_ps(a.hi, b.hi, mask.lo);
     return r;
@@ -42,24 +46,24 @@ __m256 _mm256_blendv_ps(__m256 a, __m256 b, __m256 mask) {
 /*Defined in avx_load.h*/
 /*
 
-__m256d _mm256_broadcast_pd(__m128d const *mem_addr) {
-    __m256d r;
+zp::__m256d _mm256_broadcast_pd(__m128d const *mem_addr) {
+    zp::__m256d r;
     __m128d ld = *mem_addr;
     r.lo = ld;
     r.hi = ld;
     return r;
 }
 
-__m256 _mm256_broadcast_ps(__m128 const *mem_addr) {
-    __m256 r;
+zp::__m256 _mm256_broadcast_ps(__m128 const *mem_addr) {
+    zp::__m256 r;
     __m128 ld = *mem_addr;
     r.lo = ld;
     r.hi = ld;
     return r;
 }
 
-__m256d _mm256_broadcast_sd(double const *mem_addr) {
-    __m256d r;
+zp::__m256d _mm256_broadcast_sd(double const *mem_addr) {
+    zp::__m256d r;
     r.lo = _mm_set1_pd(*mem_addr);
     r.hi = _mm_set1_pd(*mem_addr);
     return r;
@@ -73,18 +77,20 @@ __m128 _mm_broadcast_ss(float const *mem_addr) {
 
 /**/
 
+#ifndef zeept_disable_marco_function
 #define _mm256_extract_epi32(a, index) _mm256_extract_epi32_cpp<index>(a);
 #define _mm256_extract_epi64(a, index) _mm256_extract_epi64_cpp<index>(a);
+#endif
 
 template <uint32_t index>
-int _mm256_extract_epi32_cpp(__m256i a) {
+int _mm256_extract_epi32_cpp(zp::__m256i a) {
     if( (index >> 2) & 1 ) {    //upper
         return _mm_extract_epi32(a.hi, index & 3);
     } else return _mm_extract_epi32(a.lo, index);
 }
 
 template <uint32_t index>
-int64_t _mm256_extract_epi64_cpp(__m256i a) {
+int64_t _mm256_extract_epi64_cpp(zp::__m256i a) {
     if( (index >> 1) & 1 ) {    //upper
         return _mm_extract_epi32(a.hi, index & 1);
     } else return _mm_extract_epi32(a.lo, index);
@@ -92,26 +98,28 @@ int64_t _mm256_extract_epi64_cpp(__m256i a) {
 
 /**/
 
+#ifndef zeept_disable_marco_function
 #define _mm256_extractf128_pd(a, index) _mm256_extractf128_pd_cpp<index>(a);
 #define _mm256_extractf128_ps(a, index) _mm256_extractf128_ps_cpp<index>(a);
 #define _mm256_extractf128_si256(a, index) _mm256_extractf128_si256_cpp<index>(a);
+#endif
 
 template <uint32_t imm8>
-__m128d _mm256_extractf128_pd_cpp(__m256d a) {
+__m128d _mm256_extractf128_pd_cpp(zp::__m256d a) {
     if(imm8 & 1) {
         return a.hi;
     } else return a.lo;
 }
 
 template <uint32_t imm8>
-__m128 _mm256_extractf128_ps_cpp(__m256 a) {
+__m128 _mm256_extractf128_ps_cpp(zp::__m256 a) {
     if(imm8 & 1) {
         return a.hi;
     } else return a.lo;
 }
 
 template <uint32_t imm8>
-__m128i _mm256_extractf128_si256_cpp(__m256i a) {
+__m128i _mm256_extractf128_si256_cpp(zp::__m256i a) {
     if(imm8 & 1) {
         return a.hi;
     } else return a.lo;
@@ -119,13 +127,15 @@ __m128i _mm256_extractf128_si256_cpp(__m256i a) {
 
 /**/
 
+#ifndef zeept_disable_marco_function
 #define _mm256_insert_epi8(a, i, index) _mm256_insert_epi8_cpp<index>(a, i);
 #define _mm256_insert_epi16(a, i, index) _mm256_insert_epi16_cpp<index>(a, i);
 #define _mm256_insert_epi32(a, i, index) _mm256_insert_epi32_cpp<index>(a, i);
 #define _mm256_insert_epi64(a, i, index) _mm256_insert_epi64_cpp<index>(a, i);
+#endif
 
 template <uint32_t index>
-__m256i _mm256_insert_epi8_cpp(__m256i a, int8_t i) {
+zp::__m256i _mm256_insert_epi8_cpp(zp::__m256i a, int8_t i) {
     if( (index >> 4) & 1 ) {    //upper
         a.hi = _mm_insert_epi16(a.hi, i, index & 15);
     } else {
@@ -135,7 +145,7 @@ __m256i _mm256_insert_epi8_cpp(__m256i a, int8_t i) {
 }
 
 template <uint32_t index>
-__m256i _mm256_insert_epi16_cpp(__m256i a, int16_t i) {
+zp::__m256i _mm256_insert_epi16_cpp(zp::__m256i a, int16_t i) {
     if( (index >> 3) & 1 ) {    //upper
         a.hi = _mm_insert_epi16(a.hi, i, index & 7);
     } else {
@@ -145,7 +155,7 @@ __m256i _mm256_insert_epi16_cpp(__m256i a, int16_t i) {
 }
 
 template <uint32_t index>
-__m256i _mm256_insert_epi32_cpp (__m256i a, int32_t i) {
+zp::__m256i _mm256_insert_epi32_cpp (zp::__m256i a, int32_t i) {
     if( (index >> 2) & 1 ) {    //upper
         a.hi = _mm_insert_epi16(a.hi, i, index & 3);
     } else {
@@ -155,7 +165,7 @@ __m256i _mm256_insert_epi32_cpp (__m256i a, int32_t i) {
 }
 
 template <uint32_t index>
-__m256i _mm256_insert_epi64_cpp (__m256i a, int64_t i) {
+zp::__m256i _mm256_insert_epi64_cpp (zp::__m256i a, int64_t i) {
     if( (index >> 1) & 1 ) {    //upper
         a.hi = _mm_insert_epi16(a.hi, i, index & 1);
     } else {
@@ -166,12 +176,14 @@ __m256i _mm256_insert_epi64_cpp (__m256i a, int64_t i) {
 
 /**/
 
+#ifndef zeept_disable_marco_function
 #define _mm256_insertf128_pd(a, b, imm8) _mm256_insertf128_pd_cpp<imm8>(a, b);
 #define _mm256_insertf128_ps(a, b, imm8) _mm256_insertf128_ps_cpp<imm8>(a, b);
 #define _mm256_insertf128_si256(a, b, imm8) _mm256_insertf128_si256_cpp<imm8>(a, b);
+#endif
 
 template <uint32_t imm8>
-__m256d _mm256_insertf128_pd_cpp(__m256d a, __m128d b) {
+zp::__m256d _mm256_insertf128_pd_cpp(zp::__m256d a, __m128d b) {
     if(imm8 & 1) {
         a.hi = b;
     } else a.lo = b;
@@ -179,7 +191,7 @@ __m256d _mm256_insertf128_pd_cpp(__m256d a, __m128d b) {
 }
 
 template <uint32_t imm8>
-__m256 _mm256_insertf128_ps_cpp(__m256 a, __m128 b) {
+zp::__m256 _mm256_insertf128_ps_cpp(zp::__m256 a, __m128 b) {
     if(imm8 & 1) {
         a.hi = b;
     } else a.lo = b;
@@ -187,7 +199,7 @@ __m256 _mm256_insertf128_ps_cpp(__m256 a, __m128 b) {
 }
 
 template <uint32_t imm8>
-__m256i _mm256_insertf128_si256_cpp(__m256i a, __m128i b) {
+zp::__m256i _mm256_insertf128_si256_cpp(zp::__m256i a, __m128i b) {
     if(imm8 & 1) {
         a.hi = b;
     } else a.lo = b;
@@ -196,10 +208,12 @@ __m256i _mm256_insertf128_si256_cpp(__m256i a, __m128i b) {
 
 /**/
 
+#ifndef zeept_disable_marco_function
 #define _mm_permute_pd(a, imm8) _mm_permute_pd_cpp<imm8>(a);
 #define _mm_permute_ps(a, imm8) _mm_permute_ps_cpp<imm8>(a);
 #define _mm256_permute_pd(a, imm8) _mm256_permute_pd_cpp<imm8>(a);
 #define _mm256_permute_ps(a, imm8) _mm256_permute_ps_cpp<imm8>(a);
+#endif
 
 template <uint32_t imm8>
 __m128d _mm_permute_pd_cpp(__m128d a) {
@@ -212,16 +226,16 @@ __m128 _mm_permute_ps_cpp(__m128 a) {
 }
 
 template <uint32_t imm8>
-__m256d _mm256_permute_pd_cpp(__m256d a) {
-    __m256d r;
+zp::__m256d _mm256_permute_pd_cpp(zp::__m256d a) {
+    zp::__m256d r;
     r.lo = _mm_permute_pd(a.lo, imm8);
     r.hi = _mm_permute_pd(a.lo, imm8 >> 2);
     return r;
 }
 
 template <uint32_t imm8>
-__m256 _mm256_permute_ps_cpp(__m256 a) {
-    __m256 r;
+zp::__m256 _mm256_permute_ps_cpp(zp::__m256 a) {
+    zp::__m256 r;
     r.lo = _mm_permute_ps(a.lo, imm8);
     r.hi = _mm_permute_ps(a.lo, imm8 >> 4);
     return r;
@@ -229,8 +243,8 @@ __m256 _mm256_permute_ps_cpp(__m256 a) {
 
 /**/
 
-__m256i _mm256_permute2f128_si256(__m256i a, __m256i b, int imm8) {
-    __m256i r;
+zp::__m256i _mm256_permute2f128_si256(zp::__m256i a, zp::__m256i b, int imm8) {
+    zp::__m256i r;
     int imlo = imm8;
     int imhi = imm8 >> 4;
 
@@ -255,15 +269,15 @@ __m256i _mm256_permute2f128_si256(__m256i a, __m256i b, int imm8) {
     return r;
 }
 
-__m256d _mm256_permute2f128_pd(__m256d a, __m256d b, int imm8) {
-    return _mm256_castsi256_pd(_mm256_permute2f128_si256(_mm256_castpd_si256(a),
-                                                        _mm256_castpd_si256(b),
+zp::__m256d _mm256_permute2f128_pd(zp::__m256d a, zp::__m256d b, int imm8) {
+    return zp::_mm256_castsi256_pd(_mm256_permute2f128_si256(zp::_mm256_castpd_si256(a),
+                                                        zp::_mm256_castpd_si256(b),
                                                         imm8));
 }
 
-__m256 _mm256_permute2f128_ps(__m256 a, __m256 b, int imm8) {
-    return _mm256_castsi256_ps(_mm256_permute2f128_si256(_mm256_castps_si256(a),
-                                                        _mm256_castps_si256(b),
+zp::__m256 _mm256_permute2f128_ps(zp::__m256 a, zp::__m256 b, int imm8) {
+    return zp::_mm256_castsi256_ps(_mm256_permute2f128_si256(zp::_mm256_castps_si256(a),
+                                                        zp::_mm256_castps_si256(b),
                                                         imm8));
 }
 
@@ -286,8 +300,8 @@ __m128d _mm_permutevar_pd(__m128d a, __m128i b) {
     return _mm_loadu_pd(ret);
 }
 
-__m256d _mm256_permutevar_pd(__m256d a, __m256i b) {
-    __m256d r;
+zp::__m256d _mm256_permutevar_pd(zp::__m256d a, zp::__m256i b) {
+    zp::__m256d r;
     r.lo = _mm_permutevar_pd(a.lo, b.lo);
     r.hi = _mm_permutevar_pd(a.hi, b.hi);
     return r;
@@ -310,8 +324,8 @@ __m128 _mm_permutevar_ps(__m128 a, __m128i b) {
     return _mm_loadu_ps(ret);
 }
 
-__m256 _mm256_permutevar_ps(__m256 a, __m256i b) {
-    __m256 r;
+zp::__m256 _mm256_permutevar_ps(zp::__m256 a, zp::__m256i b) {
+    zp::__m256 r;
     r.lo = _mm_permutevar_ps(a.lo, b.lo);
     r.hi = _mm_permutevar_ps(a.hi, b.hi);
     return r;
@@ -319,20 +333,22 @@ __m256 _mm256_permutevar_ps(__m256 a, __m256i b) {
 
 /**/
 
+#ifndef zeept_disable_marco_function
 #define _mm256_shuffle_pd(a, b, imm8) _mm256_shuffle_pd_cpp<imm8>(a, b);
 #define _mm256_shuffle_ps(a, b, imm8) _mm256_shuffle_ps_cpp<imm8>(a, b);
+#endif
 
 template <uint32_t imm8>
-__m256d _mm256_shuffle_pd_cpp(__m256d a, __m256d b) {
-    __m256d r;
+zp::__m256d _mm256_shuffle_pd_cpp(zp::__m256d a, zp::__m256d b) {
+    zp::__m256d r;
     r.lo = _mm_shuffle_pd(a.lo, b.lo, imm8);
     r.hi = _mm_shuffle_pd(a.hi, b.hi, imm8 >> 2);
     return r;
 }
 
 template <uint32_t imm8>
-__m256 _mm256_shuffle_ps_cpp(__m256 a, __m256 b) {
-    __m256 r;
+zp::__m256 _mm256_shuffle_ps_cpp(zp::__m256 a, zp::__m256 b) {
+    zp::__m256 r;
     r.lo = _mm_shuffle_ps(a.lo, b.lo, imm8);
     r.hi = _mm_shuffle_ps(a.hi, b.hi, imm8 >> 4);
     return r;
@@ -340,29 +356,29 @@ __m256 _mm256_shuffle_ps_cpp(__m256 a, __m256 b) {
 
 /**/
 
-__m256d _mm256_unpackhi_pd(__m256d a, __m256d b) {
-    __m256d r;
+zp::__m256d _mm256_unpackhi_pd(zp::__m256d a, zp::__m256d b) {
+    zp::__m256d r;
     r.lo = _mm_unpackhi_pd(a.lo, b.lo);
     r.hi = _mm_unpackhi_pd(a.hi, b.hi);
     return r;
 }
 
-__m256 _mm256_unpackhi_ps(__m256 a, __m256 b) {
-    __m256 r;
+zp::__m256 _mm256_unpackhi_ps(zp::__m256 a, zp::__m256 b) {
+    zp::__m256 r;
     r.lo = _mm_unpackhi_ps(a.lo, b.lo);
     r.hi = _mm_unpackhi_ps(a.hi, b.hi);
     return r;
 }
 
-__m256d _mm256_unpacklo_pd(__m256d a, __m256d b) {
-    __m256d r;
+zp::__m256d _mm256_unpacklo_pd(zp::__m256d a, zp::__m256d b) {
+    zp::__m256d r;
     r.lo = _mm_unpacklo_pd(a.lo, b.lo);
     r.hi = _mm_unpacklo_pd(a.hi, b.hi);
     return r;
 }
 
-__m256 _mm256_unpacklo_ps(__m256 a, __m256 b) {
-    __m256 r;
+zp::__m256 _mm256_unpacklo_ps(zp::__m256 a, zp::__m256 b) {
+    zp::__m256 r;
     r.lo = _mm_unpacklo_ps(a.lo, b.lo);
     r.hi = _mm_unpacklo_ps(a.hi, b.hi);
     return r;
@@ -370,11 +386,13 @@ __m256 _mm256_unpacklo_ps(__m256 a, __m256 b) {
 
 /*Optional implementation*/
 
+//optional implementation keep it marco as it wont conflict with anything else
+
 #define _mm256_shuffle_ps_zp_impl2(a, b, imm8) _mm256_shuffle_ps_cpp_zp_impl2<imm8>(a, b);
 
 template <uint32_t imm8>
-__m256 _mm256_shuffle_ps_cpp_zp_impl2(__m256 __a, __m256 __b) {
-    __m256 r;
+zp::__m256 _mm256_shuffle_ps_cpp_zp_impl2(zp::__m256 __a, zp::__m256 __b) {
+    zp::__m256 r;
     float a[8], b[8], ret[8];
     _mm_store_ps((float*) a, __a.lo);
     _mm_store_ps((float*) a+4, __a.hi);
@@ -434,5 +452,7 @@ __m256 _mm256_shuffle_ps_cpp_zp_impl2(__m256 __a, __m256 __b) {
     r.hi = _mm_loadu_ps(ret+4);
     return r;
 }
+
+}   //namespace zp
 
 #endif

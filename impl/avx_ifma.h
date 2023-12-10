@@ -8,6 +8,8 @@
  * no multiply qword -> double qword so do manual mul
  **/
 
+namespace zp {
+
 /**/
 
 __m128i _mm_madd52lo_epu64(__m128i __X, __m128i __Y, __m128i __Z) {
@@ -38,8 +40,8 @@ __m128i _mm_madd52lo_epu64(__m128i __X, __m128i __Y, __m128i __Z) {
     return reglo;
 }
 
-__m256i _mm256_madd52lo_epu64(__m256i __X, __m256i __Y, __m256i __Z) {
-    __m256i r;
+zp::__m256i _mm256_madd52lo_epu64(zp::__m256i __X, zp::__m256i __Y, zp::__m256i __Z) {
+    zp::__m256i r;
     r.lo = _mm_madd52lo_epu64(__X.lo, __Y.lo, __Z.lo);
     r.hi = _mm_madd52lo_epu64(__X.hi, __Y.hi, __Z.hi);
     return r;
@@ -49,7 +51,7 @@ __m128i _mm_madd52lo_avx_epu64(__m128i __X, __m128i __Y, __m128i __Z) {
     return _mm_madd52lo_epu64(__X, __Y, __Z);
 }
 
-__m256i _mm_madd52lo_avx_epu64(__m256i __X, __m256i __Y, __m256i __Z) {
+zp::__m256i _mm_madd52lo_avx_epu64(zp::__m256i __X, zp::__m256i __Y, zp::__m256i __Z) {
     return _mm256_madd52lo_epu64(__X, __Y, __Z);
 }
 
@@ -87,8 +89,8 @@ __m128i _mm_madd52hi_epu64(__m128i __X, __m128i __Y, __m128i __Z) {
     return reghi;
 }
 
-__m256i _mm256_madd52hi_epu64(__m256i __X, __m256i __Y, __m256i __Z) {
-    __m256i r;
+zp::__m256i _mm256_madd52hi_epu64(zp::__m256i __X, zp::__m256i __Y, zp::__m256i __Z) {
+    zp::__m256i r;
     r.lo = _mm_madd52hi_epu64(__X.lo, __Y.lo, __Z.lo);
     r.hi = _mm_madd52hi_epu64(__X.hi, __Y.hi, __Z.hi);
     return r;
@@ -98,18 +100,18 @@ __m128i _mm_madd52hi_avx_epu64(__m128i __X, __m128i __Y, __m128i __Z) {
     return _mm_madd52hi_epu64(__X, __Y, __Z);
 }
 
-__m256i _mm_madd52hi_avx_epu64(__m256i __X, __m256i __Y, __m256i __Z) {
+zp::__m256i _mm_madd52hi_avx_epu64(zp::__m256i __X, zp::__m256i __Y, zp::__m256i __Z) {
     return _mm256_madd52hi_epu64(__X, __Y, __Z);
 }
 
 /*Optional implementation*/
 
-__m256i _mm256_madd52lo_epu64_zp_impl2(__m256i __X, __m256i __Y, __m256i __Z) {
+zp::__m256i _mm256_madd52lo_epu64_zp_impl2(zp::__m256i __X, zp::__m256i __Y, zp::__m256i __Z) {
     const uint64_t const52 = (1LL << 52)-1;
     __m128i bit52 = _mm_set1_epi64x(const52);
     uint64_t x[4], y[4], interlo[4];
     uint64_t lo, hi;
-    __m256i reg;
+    zp::__m256i reg;
 
     __X.lo = _mm_and_si128(__X.lo, bit52);
     __X.hi = _mm_and_si128(__X.hi, bit52);
@@ -147,12 +149,12 @@ __m256i _mm256_madd52lo_epu64_zp_impl2(__m256i __X, __m256i __Y, __m256i __Z) {
     return reg;
 }
 
-__m256i _mm256_madd52hi_epu64_zp_impl2(__m256i __X, __m256i __Y, __m256i __Z) {
+zp::__m256i _mm256_madd52hi_epu64_zp_impl2(zp::__m256i __X, zp::__m256i __Y, zp::__m256i __Z) {
     const uint64_t const52 = (1LL << 52)-1;
     __m128i bit52 = _mm_set1_epi64x(const52);
     uint64_t x[4], y[4], interhi[4];
     uint64_t lo, hi;
-    __m256i reg;
+    zp::__m256i reg;
 
     __X.lo = _mm_and_si128(__X.lo, bit52);
     __X.hi = _mm_and_si128(__X.hi, bit52);
@@ -197,5 +199,7 @@ __m256i _mm256_madd52hi_epu64_zp_impl2(__m256i __X, __m256i __Y, __m256i __Z) {
     
     return reg;
 }
+
+}   //namespace zp
 
 #endif

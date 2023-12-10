@@ -18,6 +18,8 @@
 #include <stdint.h>
 #include <nmmintrin.h>  //sse4.2
 
+namespace zp {
+
 typedef struct __zeept_m256d {
     __m128d lo;
     __m128d hi;
@@ -36,5 +38,10 @@ typedef struct __zeept_m256i {
 // #define __m256d __zeept_m256d
 // #define __m256 __zeept_m256
 // #define __m256i __zeept_m256i
+
+}
+
+//Uncomment to disable all conflicting marco functions when using avx/avx2 headers
+// #define zeept_disable_marco_function
 
 #endif

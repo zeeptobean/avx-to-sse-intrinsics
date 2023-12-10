@@ -3,17 +3,19 @@
 
 #include "../base.h"
 
+namespace zp {
+
 /**/
 
-__m256d _mm256_add_pd(__m256d a, __m256d b) {
-    __m256d ret;
+zp::__m256d _mm256_add_pd(zp::__m256d a, zp::__m256d b) {
+    zp::__m256d ret;
     ret.lo = _mm_add_pd(a.lo, b.lo);
     ret.hi = _mm_add_pd(a.hi, b.hi);
     return ret;
 }
 
-__m256 _mm256_add_ps(__m256 a, __m256 b) {
-    __m256 ret;
+zp::__m256 _mm256_add_ps(zp::__m256 a, zp::__m256 b) {
+    zp::__m256 ret;
     ret.lo = _mm_add_ps(a.lo, b.lo);
     ret.hi = _mm_add_ps(a.hi, b.hi);
     return ret;
@@ -21,15 +23,15 @@ __m256 _mm256_add_ps(__m256 a, __m256 b) {
 
 /**/
 
-__m256d _mm256_addsub_pd(__m256d a, __m256d b) {
-    __m256d ret;
+zp::__m256d _mm256_addsub_pd(zp::__m256d a, zp::__m256d b) {
+    zp::__m256d ret;
     ret.lo = _mm_addsub_pd(a.lo, b.lo);
     ret.hi = _mm_addsub_pd(a.hi, b.hi);
     return ret;
 }
 
-__m256 _mm256_addsub_ps(__m256 a, __m256 b) {
-    __m256 ret;
+zp::__m256 _mm256_addsub_ps(zp::__m256 a, zp::__m256 b) {
+    zp::__m256 ret;
     ret.lo = _mm_addsub_ps(a.lo, b.lo);
     ret.hi = _mm_addsub_ps(a.hi, b.hi);
     return ret;
@@ -37,15 +39,15 @@ __m256 _mm256_addsub_ps(__m256 a, __m256 b) {
 
 /**/
 
-__m256d _mm256_div_pd(__m256d a, __m256d b) {
-    __m256d ret;
+zp::__m256d _mm256_div_pd(zp::__m256d a, zp::__m256d b) {
+    zp::__m256d ret;
     ret.lo = _mm_div_pd(a.lo, b.lo);
     ret.hi = _mm_div_pd(a.hi, b.hi);
     return ret;
 }
 
-__m256 _mm256_div_ps(__m256 a, __m256 b) {
-    __m256 ret;
+zp::__m256 _mm256_div_ps(zp::__m256 a, zp::__m256 b) {
+    zp::__m256 ret;
     ret.lo = _mm_div_ps(a.lo, b.lo);
     ret.hi = _mm_div_ps(a.hi, b.hi);
     return ret;
@@ -53,15 +55,15 @@ __m256 _mm256_div_ps(__m256 a, __m256 b) {
 
 /**/
 
-__m256d _mm256_hadd_pd(__m256d a, __m256d b) {
-    __m256d ret;
+zp::__m256d _mm256_hadd_pd(zp::__m256d a, zp::__m256d b) {
+    zp::__m256d ret;
     ret.lo = _mm_hadd_pd(a.lo, b.lo);
     ret.hi = _mm_hadd_pd(a.hi, b.hi);
     return ret;
 }
 
-__m256 _mm256_hadd_ps(__m256 a, __m256 b) {
-    __m256 ret;
+zp::__m256 _mm256_hadd_ps(zp::__m256 a, zp::__m256 b) {
+    zp::__m256 ret;
     ret.lo = _mm_hadd_ps(a.lo, b.lo);
     ret.hi = _mm_hadd_ps(a.hi, b.hi);
     return ret;
@@ -69,15 +71,15 @@ __m256 _mm256_hadd_ps(__m256 a, __m256 b) {
 
 /**/
 
-__m256d _mm256_hsub_pd(__m256d a, __m256d b) {
-    __m256d ret;
+zp::__m256d _mm256_hsub_pd(zp::__m256d a, zp::__m256d b) {
+    zp::__m256d ret;
     ret.lo = _mm_hsub_pd(a.lo, b.lo);
     ret.hi = _mm_hsub_pd(a.hi, b.hi);
     return ret;
 }
 
-__m256 _mm256_hsub_ps(__m256 a, __m256 b) {
-    __m256 ret;
+zp::__m256 _mm256_hsub_ps(zp::__m256 a, zp::__m256 b) {
+    zp::__m256 ret;
     ret.lo = _mm_hsub_ps(a.lo, b.lo);
     ret.hi = _mm_hsub_ps(a.hi, b.hi);
     return ret;
@@ -85,15 +87,15 @@ __m256 _mm256_hsub_ps(__m256 a, __m256 b) {
 
 /**/
 
-__m256d _mm256_mul_pd(__m256d a, __m256d b) {
-    __m256d ret;
+zp::__m256d _mm256_mul_pd(zp::__m256d a, zp::__m256d b) {
+    zp::__m256d ret;
     ret.lo = _mm_mul_pd(a.lo, b.lo);
     ret.hi = _mm_mul_pd(a.hi, b.hi);
     return ret;
 }
 
-__m256 _mm256_mul_ps(__m256 a, __m256 b) {
-    __m256 ret;
+zp::__m256 _mm256_mul_ps(zp::__m256 a, zp::__m256 b) {
+    zp::__m256 ret;
     ret.lo = _mm_mul_ps(a.lo, b.lo);
     ret.hi = _mm_mul_ps(a.hi, b.hi);
     return ret;
@@ -101,15 +103,15 @@ __m256 _mm256_mul_ps(__m256 a, __m256 b) {
 
 /**/
 
-__m256d _mm256_sub_pd(__m256d a, __m256d b) {
-    __m256d ret;
+zp::__m256d _mm256_sub_pd(zp::__m256d a, zp::__m256d b) {
+    zp::__m256d ret;
     ret.lo = _mm_sub_pd(a.lo, b.lo);
     ret.hi = _mm_sub_pd(a.hi, b.hi);
     return ret;
 }
 
-__m256 _mm256_sub_ps(__m256 a, __m256 b) {
-    __m256 ret;
+zp::__m256 _mm256_sub_ps(zp::__m256 a, zp::__m256 b) {
+    zp::__m256 ret;
     ret.lo = _mm_sub_ps(a.lo, b.lo);
     ret.hi = _mm_sub_ps(a.hi, b.hi);
     return ret;
@@ -118,15 +120,15 @@ __m256 _mm256_sub_ps(__m256 a, __m256 b) {
 #define _mm256_dp_ps(a, b, imm8) _mm256_dp_ps_cpp<imm8>(a, b)
 
 template<uint8_t imm8>
-__m256 _mm256_dp_ps_cpp(__m256 a, __m256 b) {
-    __m256 ret;
+zp::__m256 _mm256_dp_ps_cpp(zp::__m256 a, zp::__m256 b) {
+    zp::__m256 ret;
     ret.lo = _mm_dp_ps(a.lo, b.lo, imm8);
     ret.hi = _mm_dp_ps(a.hi, b.hi, imm8);
     return ret;
 }
 
 
-__m256 _mm256_dp_ps_nonconst(__m256 a, __m256 b, int imm8) {
+zp::__m256 _mm256_dp_ps_nonconst(zp::__m256 a, zp::__m256 b, int imm8) {
     int calcmask = imm8 >> 4;
     int storemask = imm8 & 15;
 
@@ -173,7 +175,7 @@ __m256 _mm256_dp_ps_nonconst(__m256 a, __m256 b, int imm8) {
  * Current implementation already optimized with cmovne on msvc or
  * aggressive simd-ing on clang-17, while gcc and older clang still branching...  
  * */
-__m256 _mm256_dp_ps_nonconst_zp_impl2(__m256 a, __m256 b, int imm8) {
+zp::__m256 _mm256_dp_ps_nonconst_zp_impl2(zp::__m256 a, zp::__m256 b, int imm8) {
     int calcmask = imm8 >> 4;
     int storemask = imm8 & 15;
 
@@ -214,5 +216,7 @@ __m256 _mm256_dp_ps_nonconst_zp_impl2(__m256 a, __m256 b, int imm8) {
 
     return a;
 }
+
+}   //namespace zp
 
 #endif

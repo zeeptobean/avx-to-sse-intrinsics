@@ -4,6 +4,8 @@
 #include "../base.h"
 #include "../internal_func.h"
 
+namespace zp {
+
 /*byte, unsigned signed*/
 
 __m128i _mm_dpbusd_epi32(__m128i src, __m128i __a, __m128i __b) {
@@ -42,8 +44,8 @@ __m128i _mm_dpbusd_epi32(__m128i src, __m128i __a, __m128i __b) {
     return src;
 }
 
-__m256i _mm256_dpbusd_epi32(__m256i src, __m256i a, __m256i b) {
-    __m256i r;
+zp::__m256i _mm256_dpbusd_epi32(zp::__m256i src, zp::__m256i a, zp::__m256i b) {
+    zp::__m256i r;
     r.hi = _mm_dpbusd_epi32(src.hi, a.hi, b.hi);
     r.lo = _mm_dpbusd_epi32(src.lo, a.lo, b.lo);
     return r;
@@ -53,8 +55,8 @@ __m128i _mm_dpbusd_avx_epi32(__m128i src, __m128i a, __m128i b) {
     return _mm_dpbusd_epi32(src, a, b);
 }
 
-__m256i _mm256_dpbusd_avx_epi32(__m256i src, __m256i a, __m256i b) {
-    __m256i r;
+zp::__m256i _mm256_dpbusd_avx_epi32(zp::__m256i src, zp::__m256i a, zp::__m256i b) {
+    zp::__m256i r;
     r.hi = _mm_dpbusd_epi32(src.hi, a.hi, b.hi);
     r.lo = _mm_dpbusd_epi32(src.lo, a.lo, b.lo);
     return r;
@@ -93,8 +95,8 @@ __m128i _mm_dpbusds_epi32(__m128i src, __m128i __a, __m128i __b) {
     return src;
 }
 
-__m256i _mm256_dpbusds_epi32(__m256i src, __m256i a, __m256i b) {
-    __m256i r;
+zp::__m256i _mm256_dpbusds_epi32(zp::__m256i src, zp::__m256i a, zp::__m256i b) {
+    zp::__m256i r;
     r.hi = _mm_dpbusds_epi32(src.hi, a.hi, b.hi);
     r.lo = _mm_dpbusds_epi32(src.lo, a.lo, b.lo);
     return r;
@@ -104,8 +106,8 @@ __m128i _mm_dpbusds_avx_epi32(__m128i src, __m128i a, __m128i b) {
     return _mm_dpbusds_epi32(src, a, b);
 }
 
-__m256i _mm256_dpbusds_avx_epi32(__m256i src, __m256i a, __m256i b) {
-    __m256i r;
+zp::__m256i _mm256_dpbusds_avx_epi32(zp::__m256i src, zp::__m256i a, zp::__m256i b) {
+    zp::__m256i r;
     r.hi = _mm_dpbusds_epi32(src.hi, a.hi, b.hi);
     r.lo = _mm_dpbusds_epi32(src.lo, a.lo, b.lo);
     return r;
@@ -135,8 +137,8 @@ __m128i _mm_dpwssd_epi32(__m128i src, __m128i __a, __m128i __b) {
     return src;
 }
 
-__m256i _mm256_dpwssd_epi32(__m256i src, __m256i a, __m256i b) {
-    __m256i r;
+zp::__m256i _mm256_dpwssd_epi32(zp::__m256i src, zp::__m256i a, zp::__m256i b) {
+    zp::__m256i r;
     r.hi = _mm_dpwssd_epi32(src.hi, a.hi, b.hi);
     r.lo = _mm_dpwssd_epi32(src.lo, a.lo, b.lo);
     return r;
@@ -146,8 +148,8 @@ __m128i _mm_dpwssd_avx_epi32(__m128i src, __m128i a, __m128i b) {
     return _mm_dpwssd_epi32(src, a, b);
 }
 
-__m256i _mm256_dpwssd_avx_epi32(__m256i src, __m256i a, __m256i b) {
-    __m256i r;
+zp::__m256i _mm256_dpwssd_avx_epi32(zp::__m256i src, zp::__m256i a, zp::__m256i b) {
+    zp::__m256i r;
     r.hi = _mm_dpwssd_epi32(src.hi, a.hi, b.hi);
     r.lo = _mm_dpwssd_epi32(src.lo, a.lo, b.lo);
     return r;
@@ -177,8 +179,8 @@ __m128i _mm_dpwssds_epi32(__m128i src, __m128i __a, __m128i __b) {
     return src;
 }
 
-__m256i _mm256_dpwssds_epi32(__m256i src, __m256i a, __m256i b) {
-    __m256i r;
+zp::__m256i _mm256_dpwssds_epi32(zp::__m256i src, zp::__m256i a, zp::__m256i b) {
+    zp::__m256i r;
     r.hi = _mm_dpwssds_epi32(src.hi, a.hi, b.hi);
     r.lo = _mm_dpwssds_epi32(src.lo, a.lo, b.lo);
     return r;
@@ -188,8 +190,8 @@ __m128i _mm_dpwssds_avx_epi32(__m128i src, __m128i a, __m128i b) {
     return _mm_dpwssds_epi32(src, a, b);
 }
 
-__m256i _mm256_dpwssds_avx_epi32(__m256i src, __m256i a, __m256i b) {
-    __m256i r;
+zp::__m256i _mm256_dpwssds_avx_epi32(zp::__m256i src, zp::__m256i a, zp::__m256i b) {
+    zp::__m256i r;
     r.hi = _mm_dpwssds_epi32(src.hi, a.hi, b.hi);
     r.lo = _mm_dpwssds_epi32(src.lo, a.lo, b.lo);
     return r;
@@ -228,8 +230,8 @@ __m128i _mm_dpbssd_epi32(__m128i src, __m128i __a, __m128i __b) {
     return src;
 }
 
-__m256i _mm256_dpbssd_epi32(__m256i src, __m256i a, __m256i b) {
-    __m256i r;
+zp::__m256i _mm256_dpbssd_epi32(zp::__m256i src, zp::__m256i a, zp::__m256i b) {
+    zp::__m256i r;
     r.hi = _mm_dpbssd_epi32(src.hi, a.hi, b.hi);
     r.lo = _mm_dpbssd_epi32(src.lo, a.lo, b.lo);
     return r;
@@ -268,8 +270,8 @@ __m128i _mm_dpbssds_epi32(__m128i src, __m128i __a, __m128i __b) {
     return src;
 }
 
-__m256i _mm256_dpbssds_epi32(__m256i src, __m256i a, __m256i b) {
-    __m256i r;
+zp::__m256i _mm256_dpbssds_epi32(zp::__m256i src, zp::__m256i a, zp::__m256i b) {
+    zp::__m256i r;
     r.hi = _mm_dpbssds_epi32(src.hi, a.hi, b.hi);
     r.lo = _mm_dpbssds_epi32(src.lo, a.lo, b.lo);
     return r;
@@ -308,8 +310,8 @@ __m128i _mm_dpbsud_epi32(__m128i src, __m128i __a, __m128i __b) {
     return src;
 }
 
-__m256i _mm256_dpbsud_epi32(__m256i src, __m256i a, __m256i b) {
-    __m256i r;
+zp::__m256i _mm256_dpbsud_epi32(zp::__m256i src, zp::__m256i a, zp::__m256i b) {
+    zp::__m256i r;
     r.hi = _mm_dpbsud_epi32(src.hi, a.hi, b.hi);
     r.lo = _mm_dpbsud_epi32(src.lo, a.lo, b.lo);
     return r;
@@ -348,8 +350,8 @@ __m128i _mm_dpbsuds_epi32(__m128i src, __m128i __a, __m128i __b) {
     return src;
 }
 
-__m256i _mm256_dpbsuds_epi32(__m256i src, __m256i a, __m256i b) {
-    __m256i r;
+zp::__m256i _mm256_dpbsuds_epi32(zp::__m256i src, zp::__m256i a, zp::__m256i b) {
+    zp::__m256i r;
     r.hi = _mm_dpbsuds_epi32(src.hi, a.hi, b.hi);
     r.lo = _mm_dpbsuds_epi32(src.lo, a.lo, b.lo);
     return r;
@@ -388,8 +390,8 @@ __m128i _mm_dpbuud_epi32(__m128i src, __m128i __a, __m128i __b) {
     return src;
 }
 
-__m256i _mm256_dpbuud_epi32(__m256i src, __m256i a, __m256i b) {
-    __m256i r;
+zp::__m256i _mm256_dpbuud_epi32(zp::__m256i src, zp::__m256i a, zp::__m256i b) {
+    zp::__m256i r;
     r.hi = _mm_dpbuud_epi32(src.hi, a.hi, b.hi);
     r.lo = _mm_dpbuud_epi32(src.lo, a.lo, b.lo);
     return r;
@@ -428,8 +430,8 @@ __m128i _mm_dpbuuds_epi32(__m128i src, __m128i __a, __m128i __b) {
     return src;
 }
 
-__m256i _mm256_dpbuuds_epi32(__m256i src, __m256i a, __m256i b) {
-    __m256i r;
+zp::__m256i _mm256_dpbuuds_epi32(zp::__m256i src, zp::__m256i a, zp::__m256i b) {
+    zp::__m256i r;
     r.hi = _mm_dpbuuds_epi32(src.hi, a.hi, b.hi);
     r.lo = _mm_dpbuuds_epi32(src.lo, a.lo, b.lo);
     return r;
@@ -441,6 +443,8 @@ __m128i _mm_dpwssd_epi32_zp_impl2(__m128i src, __m128i a, __m128i b) {
     a = _mm_madd_epi16(a, b);
     a = _mm_add_epi32(a, src);
     return a;
+}
+
 }
 
 #endif

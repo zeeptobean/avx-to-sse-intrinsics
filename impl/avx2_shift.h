@@ -3,20 +3,24 @@
 
 #include "../base.h"
 
+namespace zp {
+
 /*Byte shift*/
 
+#ifndef zeept_disable_marco_function
 #define _mm256_bslli_epi128(a, imm8) _mm256_bslli_epi128_cpp<imm8>(a)
 #define _mm256_bsrli_epi128(a, imm8) _mm256_bsrli_epi128_cpp<imm8>(a)
+#endif
 
 template<uint32_t imm8>
-__m256i _mm256_bslli_epi128_cpp(__m256i a) {
+zp::__m256i _mm256_bslli_epi128_cpp(zp::__m256i a) {
     a.lo = _mm_bslli_si128(a.lo, imm8);
     a.hi = _mm_bslli_si128(a.hi, imm8);
     return a;
 }
 
 template<uint32_t imm8>
-__m256i _mm256_bsrli_epi128_cpp(__m256i a) {
+zp::__m256i _mm256_bsrli_epi128_cpp(zp::__m256i a) {
     a.lo = _mm_bsrli_si128(a.lo, imm8);
     a.hi = _mm_bsrli_si128(a.hi, imm8);
     return a;
@@ -24,19 +28,19 @@ __m256i _mm256_bsrli_epi128_cpp(__m256i a) {
 
 /*Shift left, in vector*/
 
-__m256i _mm256_sll_epi16(__m256i a, __m128i count) {
+zp::__m256i _mm256_sll_epi16(zp::__m256i a, __m128i count) {
     a.lo = _mm_sll_epi16(a.lo, count);
     a.hi = _mm_sll_epi16(a.hi, count);
     return a;
 }
 
-__m256i _mm256_sll_epi32(__m256i a, __m128i count) {
+zp::__m256i _mm256_sll_epi32(zp::__m256i a, __m128i count) {
     a.lo = _mm_sll_epi32(a.lo, count);
     a.hi = _mm_sll_epi32(a.hi, count);
     return a;
 }
 
-__m256i _mm256_sll_epi64(__m256i a, __m128i count) {
+zp::__m256i _mm256_sll_epi64(zp::__m256i a, __m128i count) {
     a.lo = _mm_sll_epi64(a.lo, count);
     a.hi = _mm_sll_epi64(a.hi, count);
     return a;
@@ -44,29 +48,31 @@ __m256i _mm256_sll_epi64(__m256i a, __m128i count) {
 
 /*Shift left, in imm8*/
 
+#ifndef zeept_disable_marco_function
 #define _mm256_slli_epi16(a, imm8) _mm256_slli_epi16_cpp<imm8>(a)
 #define _mm256_slli_epi32(a, imm8) _mm256_slli_epi32_cpp<imm8>(a)
 #define _mm256_slli_epi64(a, imm8) _mm256_slli_epi64_cpp<imm8>(a)
 
 //same as _mm256_bslli_epi128
 #define _mm256_slli_si256(a, imm8) _mm256_bslli_epi128(a, imm8);
+#endif
 
 template <uint32_t imm8>
-__m256i _mm256_slli_epi16_cpp(__m256i a) {
+zp::__m256i _mm256_slli_epi16_cpp(zp::__m256i a) {
     a.lo = _mm_slli_epi16(a.lo, imm8);
     a.hi = _mm_slli_epi16(a.hi, imm8);
     return a;
 }
 
 template <uint32_t imm8>
-__m256i _mm256_slli_epi32_cpp(__m256i a) {
+zp::__m256i _mm256_slli_epi32_cpp(zp::__m256i a) {
     a.lo = _mm_slli_epi32(a.lo, imm8);
     a.hi = _mm_slli_epi32(a.hi, imm8);
     return a;
 }
 
 template <uint32_t imm8>
-__m256i _mm256_slli_epi64_cpp(__m256i a) {
+zp::__m256i _mm256_slli_epi64_cpp(zp::__m256i a) {
     a.lo = _mm_slli_epi64(a.lo, imm8);
     a.hi = _mm_slli_epi64(a.hi, imm8);
     return a;
@@ -88,7 +94,7 @@ __m128i _mm_sllv_epi32(__m128i a, __m128i count) {
     return a;
 }
 
-__m256i _mm256_sllv_epi32(__m256i a, __m256i count) {
+zp::__m256i _mm256_sllv_epi32(zp::__m256i a, zp::__m256i count) {
     a.lo = _mm_sllv_epi32(a.lo, count.lo);
     a.hi = _mm_sllv_epi32(a.hi, count.hi);
     return a;
@@ -106,7 +112,7 @@ __m128i _mm_sllv_epi64(__m128i a, __m128i count) {
     return a;
 }
 
-__m256i _mm256_sllv_epi64(__m256i a, __m256i count) {
+zp::__m256i _mm256_sllv_epi64(zp::__m256i a, zp::__m256i count) {
     a.lo = _mm_sllv_epi64(a.lo, count.lo);
     a.hi = _mm_sllv_epi64(a.hi, count.hi);
     return a;
@@ -114,13 +120,13 @@ __m256i _mm256_sllv_epi64(__m256i a, __m256i count) {
 
 /*Shift right arithmetic, in vector*/
 
-__m256i _mm256_sra_epi16(__m256i a, __m128i count) {
+zp::__m256i _mm256_sra_epi16(zp::__m256i a, __m128i count) {
     a.lo = _mm_sra_epi16(a.lo, count);
     a.hi = _mm_sra_epi16(a.hi, count);
     return a;
 }
 
-__m256i _mm256_sra_epi32(__m256i a, __m128i count) {
+zp::__m256i _mm256_sra_epi32(zp::__m256i a, __m128i count) {
     a.lo = _mm_sra_epi32(a.lo, count);
     a.hi = _mm_sra_epi32(a.hi, count);
     return a;
@@ -128,18 +134,20 @@ __m256i _mm256_sra_epi32(__m256i a, __m128i count) {
 
 /*Shift right arithmetic, in imm8*/
 
+#ifndef zeept_disable_marco_function
 #define _mm256_srai_epi16(a, imm8) _mm256_srai_epi16_cpp<imm8>(a)
 #define _mm256_srai_epi32(a, imm8) _mm256_srai_epi32_cpp<imm8>(a)
+#endif
 
 template <uint32_t imm8>
-__m256i _mm256_srai_epi16_cpp(__m256i a) {
+zp::__m256i _mm256_srai_epi16_cpp(zp::__m256i a) {
     a.lo = _mm_srai_epi16(a.lo, imm8);
     a.hi = _mm_srai_epi16(a.hi, imm8);
     return a;
 }
 
 template <uint32_t imm8>
-__m256i _mm256_srai_epi32_cpp(__m256i a) {
+zp::__m256i _mm256_srai_epi32_cpp(zp::__m256i a) {
     a.lo = _mm_srai_epi32(a.lo, imm8);
     a.hi = _mm_srai_epi32(a.hi, imm8);
     return a;
@@ -176,7 +184,7 @@ __m128i _mm_srav_epi32(__m128i a, __m128i cnt) {
 #endif
 }
 
-__m256i _mm256_srav_epi32(__m256i a, __m256i count) {
+zp::__m256i _mm256_srav_epi32(zp::__m256i a, zp::__m256i count) {
     a.lo = _mm_srav_epi32(a.lo, count.lo);
     a.hi = _mm_srav_epi32(a.hi, count.hi);
     return a;
@@ -184,19 +192,19 @@ __m256i _mm256_srav_epi32(__m256i a, __m256i count) {
 
 /*Shift right logical, in vector*/
 
-__m256i _mm256_srl_epi16(__m256i a, __m128i count) {
+zp::__m256i _mm256_srl_epi16(zp::__m256i a, __m128i count) {
     a.lo = _mm_srl_epi16(a.lo, count);
     a.hi = _mm_srl_epi16(a.hi, count);
     return a;
 }
 
-__m256i _mm256_srl_epi32(__m256i a, __m128i count) {
+zp::__m256i _mm256_srl_epi32(zp::__m256i a, __m128i count) {
     a.lo = _mm_srl_epi32(a.lo, count);
     a.hi = _mm_srl_epi32(a.hi, count);
     return a;
 }
 
-__m256i _mm256_srl_epi64(__m256i a, __m128i count) {
+zp::__m256i _mm256_srl_epi64(zp::__m256i a, __m128i count) {
     a.lo = _mm_srl_epi64(a.lo, count);
     a.hi = _mm_srl_epi64(a.hi, count);
     return a;
@@ -204,26 +212,28 @@ __m256i _mm256_srl_epi64(__m256i a, __m128i count) {
 
 /*Shift right logical, in imm8*/
 
+#ifndef zeept_disable_marco_function
 #define _mm256_srli_epi16(a, imm8) _mm256_srli_epi16_cpp<imm8>(a)
 #define _mm256_srli_epi32(a, imm8) _mm256_srli_epi32_cpp<imm8>(a)
 #define _mm256_srli_epi64(a, imm8) _mm256_srli_epi64_cpp<imm8>(a)
+#endif
 
 template <uint32_t imm8>
-__m256i _mm256_srli_epi16_cpp(__m256i a) {
+zp::__m256i _mm256_srli_epi16_cpp(zp::__m256i a) {
     a.lo = _mm_srli_epi16(a.lo, imm8);
     a.hi = _mm_srli_epi16(a.hi, imm8);
     return a;
 }
 
 template <uint32_t imm8>
-__m256i _mm256_srli_epi32_cpp(__m256i a) {
+zp::__m256i _mm256_srli_epi32_cpp(zp::__m256i a) {
     a.lo = _mm_srli_epi32(a.lo, imm8);
     a.hi = _mm_srli_epi32(a.hi, imm8);
     return a;
 }
 
 template <uint32_t imm8>
-__m256i _mm256_srli_epi64_cpp(__m256i a) {
+zp::__m256i _mm256_srli_epi64_cpp(zp::__m256i a) {
     a.lo = _mm_srli_epi64(a.lo, imm8);
     a.hi = _mm_srli_epi64(a.hi, imm8);
     return a;
@@ -246,7 +256,7 @@ __m128i _mm_srlv_epi32(__m128i a, __m128i count) {
     return a;
 }
 
-__m256i _mm256_srlv_epi32(__m256i a, __m256i count) {
+zp::__m256i _mm256_srlv_epi32(zp::__m256i a, zp::__m256i count) {
     a.lo = _mm_srlv_epi32(a.lo, count.lo);
     a.hi = _mm_srlv_epi32(a.hi, count.hi);
     return a;
@@ -264,10 +274,12 @@ __m128i _mm_srlv_epi64(__m128i a, __m128i count) {
     return a;
 }
 
-__m256i _mm256_srlv_epi64(__m256i a, __m256i count) {
+zp::__m256i _mm256_srlv_epi64(zp::__m256i a, zp::__m256i count) {
     a.lo = _mm_srlv_epi64(a.lo, count.lo);
     a.hi = _mm_srlv_epi64(a.hi, count.hi);
     return a;
 }   
+
+}   //namespace zp
 
 #endif

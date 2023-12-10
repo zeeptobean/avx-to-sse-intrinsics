@@ -3,6 +3,8 @@
 
 #include "../base.h"
 
+namespace zp {
+
 /*mul, add, packed f64*/
 
 __m128d _mm_fmadd_pd(__m128d a, __m128d b, __m128d c) {
@@ -11,8 +13,8 @@ __m128d _mm_fmadd_pd(__m128d a, __m128d b, __m128d c) {
     return a;
 }
 
-__m256d _mm256_fmadd_pd(__m256d a, __m256d b, __m256d c) {
-    __m256d r;
+zp::__m256d _mm256_fmadd_pd(zp::__m256d a, zp::__m256d b, zp::__m256d c) {
+    zp::__m256d r;
     r.lo = _mm_fmadd_pd(a.lo, b.lo, c.lo);
     r.hi = _mm_fmadd_pd(a.hi, b.hi, c.hi);
     return r;
@@ -26,8 +28,8 @@ __m128 _mm_fmadd_ps(__m128 a, __m128 b, __m128 c) {
     return a;
 }
 
-__m256 _mm256_fmadd_ps(__m256 a, __m256 b, __m256 c) {
-    __m256 r;
+zp::__m256 _mm256_fmadd_ps(zp::__m256 a, zp::__m256 b, zp::__m256 c) {
+    zp::__m256 r;
     r.lo = _mm_fmadd_ps(a.lo, b.lo, c.lo);
     r.hi = _mm_fmadd_ps(a.hi, b.hi, c.hi);
     return r;
@@ -41,8 +43,8 @@ __m128d _mm_fmsub_pd(__m128d a, __m128d b, __m128d c) {
     return a;
 }
 
-__m256d _mm256_fmsub_pd(__m256d a, __m256d b, __m256d c) {
-    __m256d r;
+zp::__m256d _mm256_fmsub_pd(zp::__m256d a, zp::__m256d b, zp::__m256d c) {
+    zp::__m256d r;
     r.lo = _mm_fmsub_pd(a.lo, b.lo, c.lo);
     r.hi = _mm_fmsub_pd(a.hi, b.hi, c.hi);
     return r;
@@ -56,8 +58,8 @@ __m128 _mm_fmsub_ps(__m128 a, __m128 b, __m128 c) {
     return a;
 }
 
-__m256 _mm256_fmsub_ps(__m256 a, __m256 b, __m256 c) {
-    __m256 r;
+zp::__m256 _mm256_fmsub_ps(zp::__m256 a, zp::__m256 b, zp::__m256 c) {
+    zp::__m256 r;
     r.lo = _mm_fmsub_ps(a.lo, b.lo, c.lo);
     r.hi = _mm_fmsub_ps(a.hi, b.hi, c.hi);
     return r;
@@ -71,8 +73,8 @@ __m128d _mm_fmaddsub_pd(__m128d a, __m128d b, __m128d c) {
     return a;
 }
 
-__m256d _mm256_fmaddsub_pd(__m256d a, __m256d b, __m256d c) {
-    __m256d r;
+zp::__m256d _mm256_fmaddsub_pd(zp::__m256d a, zp::__m256d b, zp::__m256d c) {
+    zp::__m256d r;
     r.lo = _mm_fmaddsub_pd(a.lo, b.lo, c.lo);
     r.hi = _mm_fmaddsub_pd(a.hi, b.hi, c.hi);
     return r;
@@ -86,8 +88,8 @@ __m128 _mm_fmaddsub_ps(__m128 a, __m128 b, __m128 c) {
     return a;
 }
 
-__m256 _mm256_fmaddsub_ps(__m256 a, __m256 b, __m256 c) {
-    __m256 r;
+zp::__m256 _mm256_fmaddsub_ps(zp::__m256 a, zp::__m256 b, zp::__m256 c) {
+    zp::__m256 r;
     r.lo = _mm_fmaddsub_ps(a.lo, b.lo, c.lo);
     r.hi = _mm_fmaddsub_ps(a.hi, b.hi, c.hi);
     return r;
@@ -103,8 +105,8 @@ __m128d _mm_fmsubadd_pd(__m128d a, __m128d b, __m128d c) {
     return a;
 }
 
-__m256d _mm256_fmsubadd_pd(__m256d a, __m256d b, __m256d c) {
-    __m256d r;
+zp::__m256d _mm256_fmsubadd_pd(zp::__m256d a, zp::__m256d b, zp::__m256d c) {
+    zp::__m256d r;
     r.lo = _mm_fmaddsub_pd(a.lo, b.lo, c.lo);
     r.hi = _mm_fmaddsub_pd(a.hi, b.hi, c.hi);
     return r;
@@ -120,8 +122,8 @@ __m128 _mm_fmsubadd_ps(__m128 a, __m128 b, __m128 c) {
     return a;
 }
 
-__m256 _mm256_fmsubadd_ps(__m256 a, __m256 b, __m256 c) {
-    __m256 r;
+zp::__m256 _mm256_fmsubadd_ps(zp::__m256 a, zp::__m256 b, zp::__m256 c) {
+    zp::__m256 r;
     r.lo = _mm_fmsubadd_ps(a.lo, b.lo, c.lo);
     r.hi = _mm_fmsubadd_ps(a.hi, b.hi, c.hi);
     return r;
@@ -137,8 +139,8 @@ __m128d _mm_fnmadd_pd(__m128d a, __m128d b, __m128d c) {
     return a;
 }
 
-__m256d _mm256_fnmadd_pd(__m256d a, __m256d b, __m256d c) {
-    __m256d r;
+zp::__m256d _mm256_fnmadd_pd(zp::__m256d a, zp::__m256d b, zp::__m256d c) {
+    zp::__m256d r;
     r.lo = _mm_fnmadd_pd(a.lo, b.lo, c.lo);
     r.hi = _mm_fnmadd_pd(a.hi, b.hi, c.hi);
     return r;
@@ -154,8 +156,8 @@ __m128 _mm_fnmadd_ps(__m128 a, __m128 b, __m128 c) {
     return a;
 }
 
-__m256 _mm256_fnmadd_ps(__m256 a, __m256 b, __m256 c) {
-    __m256 r;
+zp::__m256 _mm256_fnmadd_ps(zp::__m256 a, zp::__m256 b, zp::__m256 c) {
+    zp::__m256 r;
     r.lo = _mm_fnmadd_ps(a.lo, b.lo, c.lo);
     r.hi = _mm_fnmadd_ps(a.hi, b.hi, c.hi);
     return r;
@@ -171,8 +173,8 @@ __m128d _mm_fnmsub_pd(__m128d a, __m128d b, __m128d c) {
     return a;
 }
 
-__m256d _mm256_fnmsub_pd(__m256d a, __m256d b, __m256d c) {
-    __m256d r;
+zp::__m256d _mm256_fnmsub_pd(zp::__m256d a, zp::__m256d b, zp::__m256d c) {
+    zp::__m256d r;
     r.lo = _mm_fnmsub_pd(a.lo, b.lo, c.lo);
     r.hi = _mm_fnmsub_pd(a.hi, b.hi, c.hi);
     return r;
@@ -188,8 +190,8 @@ __m128 _mm_fnmsub_ps(__m128 a, __m128 b, __m128 c) {
     return a;
 }
 
-__m256 _mm256_fnmsub_ps(__m256 a, __m256 b, __m256 c) {
-    __m256 r;
+zp::__m256 _mm256_fnmsub_ps(zp::__m256 a, zp::__m256 b, zp::__m256 c) {
+    zp::__m256 r;
     r.lo = _mm_fnmsub_ps(a.lo, b.lo, c.lo);
     r.hi = _mm_fnmsub_ps(a.hi, b.hi, c.hi);
     return r;
@@ -298,5 +300,7 @@ __m128 _mm_fnmsub_ss(__m128 __a, __m128 __b, __m128 __c) {
 
     return _mm_move_ss(__a, _mm_set_ss(a));
 }
+
+}   //namespace zp
 
 #endif
