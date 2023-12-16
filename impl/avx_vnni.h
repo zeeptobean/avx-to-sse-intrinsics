@@ -6,9 +6,21 @@
 
 namespace zp {
 
+/*marco*/
+#ifndef zeept_disable_marco_function
+#define _mm_dpbusd_epi32(src, a, b) _mm_dpbusd_epi32_cpp(src, a, b);
+#define _mm256_dpbusd_epi32(src, a, b) _mm256_dpbusd_epi32_cpp(src, a, b);
+#define _mm_dpbusds_epi32(src, a, b) _mm_dpbusds_epi32_cpp(src, a, b);
+#define _mm256_dpbusds_epi32(src, a, b) _mm256_dpbusds_epi32_cpp(src, a, b);
+#define _mm_dpwssd_epi32(src, a, b) _mm_dpwssd_epi32_cpp(src, a, b);
+#define _mm256_dpwssd_epi32(src, a, b) _mm256_dpwssd_epi32_cpp(src, a, b);
+#define _mm_dpwssds_epi32(src, a, b) _mm_dpwssds_epi32_cpp(src, a, b);
+#define _mm256_dpwssds_epi32(src, a, b) _mm256_dpwssds_epi32_cpp(src, a, b);
+#endif
+
 /*byte, unsigned signed*/
 
-__m128i _mm_dpbusd_epi32(__m128i src, __m128i __a, __m128i __b) {
+__m128i _mm_dpbusd_epi32_cpp(__m128i src, __m128i __a, __m128i __b) {
     //Must case sign -> unsign to zero-extend, otherwise sign-extend 
     //In this case the type are specified then no more cast
     uint8_t a[16];
@@ -44,18 +56,18 @@ __m128i _mm_dpbusd_epi32(__m128i src, __m128i __a, __m128i __b) {
     return src;
 }
 
-zp::__m256i _mm256_dpbusd_epi32(zp::__m256i src, zp::__m256i a, zp::__m256i b) {
+zp::__m256i _mm256_dpbusd_epi32_cpp(zp::__m256i src, zp::__m256i a, zp::__m256i b) {
     zp::__m256i r;
     r.hi = _mm_dpbusd_epi32(src.hi, a.hi, b.hi);
     r.lo = _mm_dpbusd_epi32(src.lo, a.lo, b.lo);
     return r;
 }
 
-__m128i _mm_dpbusd_avx_epi32(__m128i src, __m128i a, __m128i b) {
+__m128i _mm_dpbusd_avx_epi32_cpp(__m128i src, __m128i a, __m128i b) {
     return _mm_dpbusd_epi32(src, a, b);
 }
 
-zp::__m256i _mm256_dpbusd_avx_epi32(zp::__m256i src, zp::__m256i a, zp::__m256i b) {
+zp::__m256i _mm256_dpbusd_avx_epi32_cpp(zp::__m256i src, zp::__m256i a, zp::__m256i b) {
     zp::__m256i r;
     r.hi = _mm_dpbusd_epi32(src.hi, a.hi, b.hi);
     r.lo = _mm_dpbusd_epi32(src.lo, a.lo, b.lo);
@@ -64,7 +76,7 @@ zp::__m256i _mm256_dpbusd_avx_epi32(zp::__m256i src, zp::__m256i a, zp::__m256i 
 
 /*byte, unsigned signed, saturated*/
 
-__m128i _mm_dpbusds_epi32(__m128i src, __m128i __a, __m128i __b) {
+__m128i _mm_dpbusds_epi32_cpp(__m128i src, __m128i __a, __m128i __b) {
     uint8_t a[16];
     int8_t b[16];
     _mm_storeu_si128( (__m128i*) a, __a);
@@ -95,18 +107,18 @@ __m128i _mm_dpbusds_epi32(__m128i src, __m128i __a, __m128i __b) {
     return src;
 }
 
-zp::__m256i _mm256_dpbusds_epi32(zp::__m256i src, zp::__m256i a, zp::__m256i b) {
+zp::__m256i _mm256_dpbusds_epi32_cpp(zp::__m256i src, zp::__m256i a, zp::__m256i b) {
     zp::__m256i r;
     r.hi = _mm_dpbusds_epi32(src.hi, a.hi, b.hi);
     r.lo = _mm_dpbusds_epi32(src.lo, a.lo, b.lo);
     return r;
 }
 
-__m128i _mm_dpbusds_avx_epi32(__m128i src, __m128i a, __m128i b) {
+__m128i _mm_dpbusds_avx_epi32_cpp(__m128i src, __m128i a, __m128i b) {
     return _mm_dpbusds_epi32(src, a, b);
 }
 
-zp::__m256i _mm256_dpbusds_avx_epi32(zp::__m256i src, zp::__m256i a, zp::__m256i b) {
+zp::__m256i _mm256_dpbusds_avx_epi32_cpp(zp::__m256i src, zp::__m256i a, zp::__m256i b) {
     zp::__m256i r;
     r.hi = _mm_dpbusds_epi32(src.hi, a.hi, b.hi);
     r.lo = _mm_dpbusds_epi32(src.lo, a.lo, b.lo);
@@ -115,7 +127,7 @@ zp::__m256i _mm256_dpbusds_avx_epi32(zp::__m256i src, zp::__m256i a, zp::__m256i
 
 /*word, signed signed*/
 
-__m128i _mm_dpwssd_epi32(__m128i src, __m128i __a, __m128i __b) {
+__m128i _mm_dpwssd_epi32_cpp(__m128i src, __m128i __a, __m128i __b) {
     int16_t a[8], b[8];
     _mm_storeu_si128( (__m128i*) a, __a);
     _mm_storeu_si128( (__m128i*) b, __b);
@@ -137,18 +149,18 @@ __m128i _mm_dpwssd_epi32(__m128i src, __m128i __a, __m128i __b) {
     return src;
 }
 
-zp::__m256i _mm256_dpwssd_epi32(zp::__m256i src, zp::__m256i a, zp::__m256i b) {
+zp::__m256i _mm256_dpwssd_epi32_cpp(zp::__m256i src, zp::__m256i a, zp::__m256i b) {
     zp::__m256i r;
     r.hi = _mm_dpwssd_epi32(src.hi, a.hi, b.hi);
     r.lo = _mm_dpwssd_epi32(src.lo, a.lo, b.lo);
     return r;
 }
 
-__m128i _mm_dpwssd_avx_epi32(__m128i src, __m128i a, __m128i b) {
+__m128i _mm_dpwssd_avx_epi32_cpp(__m128i src, __m128i a, __m128i b) {
     return _mm_dpwssd_epi32(src, a, b);
 }
 
-zp::__m256i _mm256_dpwssd_avx_epi32(zp::__m256i src, zp::__m256i a, zp::__m256i b) {
+zp::__m256i _mm256_dpwssd_avx_epi32_cpp(zp::__m256i src, zp::__m256i a, zp::__m256i b) {
     zp::__m256i r;
     r.hi = _mm_dpwssd_epi32(src.hi, a.hi, b.hi);
     r.lo = _mm_dpwssd_epi32(src.lo, a.lo, b.lo);
@@ -157,7 +169,7 @@ zp::__m256i _mm256_dpwssd_avx_epi32(zp::__m256i src, zp::__m256i a, zp::__m256i 
 
 /*word, signed signed, saturated*/
 
-__m128i _mm_dpwssds_epi32(__m128i src, __m128i __a, __m128i __b) {
+__m128i _mm_dpwssds_epi32_cpp(__m128i src, __m128i __a, __m128i __b) {
     int16_t a[8], b[8];
     _mm_storeu_si128( (__m128i*) a, __a);
     _mm_storeu_si128( (__m128i*) b, __b);
@@ -179,18 +191,18 @@ __m128i _mm_dpwssds_epi32(__m128i src, __m128i __a, __m128i __b) {
     return src;
 }
 
-zp::__m256i _mm256_dpwssds_epi32(zp::__m256i src, zp::__m256i a, zp::__m256i b) {
+zp::__m256i _mm256_dpwssds_epi32_cpp(zp::__m256i src, zp::__m256i a, zp::__m256i b) {
     zp::__m256i r;
     r.hi = _mm_dpwssds_epi32(src.hi, a.hi, b.hi);
     r.lo = _mm_dpwssds_epi32(src.lo, a.lo, b.lo);
     return r;
 }
 
-__m128i _mm_dpwssds_avx_epi32(__m128i src, __m128i a, __m128i b) {
+__m128i _mm_dpwssds_avx_epi32_cpp(__m128i src, __m128i a, __m128i b) {
     return _mm_dpwssds_epi32(src, a, b);
 }
 
-zp::__m256i _mm256_dpwssds_avx_epi32(zp::__m256i src, zp::__m256i a, zp::__m256i b) {
+zp::__m256i _mm256_dpwssds_avx_epi32_cpp(zp::__m256i src, zp::__m256i a, zp::__m256i b) {
     zp::__m256i r;
     r.hi = _mm_dpwssds_epi32(src.hi, a.hi, b.hi);
     r.lo = _mm_dpwssds_epi32(src.lo, a.lo, b.lo);

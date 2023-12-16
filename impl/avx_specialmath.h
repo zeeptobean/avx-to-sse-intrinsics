@@ -7,14 +7,21 @@ namespace zp {
 
 /**/
 
-zp::__m256d _mm256_ceil_pd(zp::__m256d a) {
+#ifndef zeept_disable_marco_function
+#define _mm256_ceil_pd(a) _mm256_ceil_pd_cpp(a);
+#define _mm256_ceil_ps(a) _mm256_ceil_ps_cpp(a);
+#define _mm256_floor_pd(a) _mm256_floor_pd_cpp(a);
+#define _mm256_floor_ps(a) _mm256_floor_ps_cpp(a);
+#endif
+
+zp::__m256d _mm256_ceil_pd_cpp(zp::__m256d a) {
     zp::__m256d r;
     r.lo = _mm_ceil_pd(a.lo);
     r.hi = _mm_ceil_pd(a.hi);
     return r;
 }
 
-zp::__m256 _mm256_ceil_ps(zp::__m256 a) {
+zp::__m256 _mm256_ceil_ps_cpp(zp::__m256 a) {
     zp::__m256 r;
     r.lo = _mm_ceil_ps(a.lo);
     r.hi = _mm_ceil_ps(a.hi);
@@ -23,14 +30,14 @@ zp::__m256 _mm256_ceil_ps(zp::__m256 a) {
 
 /**/
 
-zp::__m256d _mm256_floor_pd(zp::__m256d a) {
+zp::__m256d _mm256_floor_pd_cpp(zp::__m256d a) {
     zp::__m256d r;
     r.lo = _mm_floor_pd(a.lo);
     r.hi = _mm_floor_pd(a.hi);
     return r;
 }
 
-zp::__m256 _mm256_floor_ps(zp::__m256 a) {
+zp::__m256 _mm256_floor_ps_cpp(zp::__m256 a) {
     zp::__m256 r;
     r.lo = _mm_floor_ps(a.lo);
     r.hi = _mm_floor_ps(a.hi);
