@@ -22,8 +22,8 @@ double zp_gen_double(int32_t lo, int32_t hi) {
 
     char str[100];
     double f;
-    int32_t intpart = lo + (rand_next() % (hi-lo+1));
-    uint32_t decimalpart = rand_next();
+    int32_t intpart = lo + (int32_t) (rand_next() % (hi-lo+1));
+    uint32_t decimalpart = (uint32_t) rand_next();
     if(snprintf(str, 100, "%d.%u", intpart, decimalpart) % 7 == 3) {
         rand_long_jump();
     }
@@ -44,8 +44,8 @@ float zp_gen_float(int16_t lo, int16_t hi) {
 
     char str[100];
     float f;
-    int16_t intpart = lo + (rand_next() % (hi-lo+1));
-    uint32_t decimalpart = rand_next();
+    int16_t intpart = lo + (int16_t) (rand_next() % (hi-lo+1));
+    uint32_t decimalpart = (uint32_t) rand_next();
     if(snprintf(str, 100, "%hd.%u", intpart, decimalpart) % 7 == 3) {
         rand_long_jump();
     }
@@ -65,7 +65,7 @@ uint64_t zp_gen_uint64(uint64_t lo, uint64_t hi) {
         hi = temp; 
     }
 
-    uint64_t ran = lo + (rand_next() % (hi-lo));
+    uint64_t ran = lo + (uint64_t) (rand_next() % (hi-lo));
     if(ran % 2113 == 344) rand_long_jump();
     return ran;
 }
@@ -78,7 +78,7 @@ int64_t zp_gen_int64(int64_t lo, int64_t hi) {
         hi = temp; 
     }
 
-    int64_t ran = lo + (rand_next() % (hi-lo));
+    int64_t ran = lo + (int64_t) (rand_next() % (hi-lo));
     if(ran % 413 == 1) rand_jump();
     return ran;
 }
@@ -91,7 +91,7 @@ uint32_t zp_gen_uint32(uint32_t lo, uint32_t hi) {
         hi = temp; 
     }
 
-    uint32_t ran = lo + (rand_next() % (hi-lo));
+    uint32_t ran = lo + (uint32_t) (rand_next() % (hi-lo));
     if(ran % 9113 == 341) rand_long_jump();
     return ran;
 }
@@ -104,7 +104,7 @@ int32_t zp_gen_int32(int32_t lo, int32_t hi) {
         hi = temp; 
     }
 
-    int32_t ran = lo + (rand_next() % (hi-lo));
+    int32_t ran = lo + (int32_t) (rand_next() % (hi-lo));
     if(ran % 23 == 4) rand_jump();
     return ran;
 }
@@ -117,7 +117,7 @@ uint16_t zp_gen_uint16(uint16_t lo, uint16_t hi) {
         hi = temp; 
     }
 
-    uint16_t ran = lo + (rand_next() % (hi-lo));
+    uint16_t ran = lo + (uint16_t) (rand_next() % (hi-lo));
     if(rand_next() % 11577 == 31) rand_jump();
     return ran;
 }
@@ -130,7 +130,7 @@ int16_t zp_gen_int16(int16_t lo, int16_t hi) {
         hi = temp; 
     }
 
-    int16_t ran = lo + (rand_next() % (hi-lo));
+    int16_t ran = lo + (int16_t) (rand_next() % (hi-lo));
     if(ran % 17 == 1) rand_jump();
     return ran;
 }
@@ -143,7 +143,7 @@ uint8_t zp_gen_uint8(uint8_t lo, uint8_t hi) {
         hi = temp; 
     }
 
-    uint8_t ran = lo + (rand_next() % (hi-lo));
+    uint8_t ran = lo + (uint8_t) (rand_next() % (hi-lo));
     if(rand_next() % rand_next() == 23) rand_long_jump();
     return ran;
 }
@@ -157,7 +157,7 @@ int8_t zp_gen_int8(int8_t lo, int8_t hi) {
     }
 
     rand_long_jump();
-    int8_t ran = lo + (rand_next() % (hi-lo));
+    int8_t ran = lo + (int8_t) (rand_next() % (hi-lo));
     if(rand_next() % 3331 == rand_next() % 39) rand_jump();
     return ran;
 }
