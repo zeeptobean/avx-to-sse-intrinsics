@@ -117,7 +117,9 @@ zp::__m256 _mm256_sub_ps(zp::__m256 a, zp::__m256 b) {
     return ret;
 }
 
+#ifndef zeept_disable_marco_function
 #define _mm256_dp_ps(a, b, imm8) _mm256_dp_ps_cpp<imm8>(a, b)
+#endif
 
 template<uint8_t imm8>
 zp::__m256 _mm256_dp_ps_cpp(zp::__m256 a, zp::__m256 b) {
