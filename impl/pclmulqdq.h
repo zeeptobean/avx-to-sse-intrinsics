@@ -9,7 +9,8 @@ namespace zp {
 /*Declaration*/
 
 #ifndef zeept_disable_marco_function
-#define _mm_clmulepi64_si128(a, b, imm8) 
+#define _mm_clmulepi64_si128(a, b, imm8) _mm_clmulepi64_si128_cpp<imm8>(a, b);
+#define _mm256_clmulepi64_epi128(a, b, imm8) _mm256_clmulepi64_epi128_cpp<imm8>(a, b);
 #endif
 
 template <uint32_t imm8>
