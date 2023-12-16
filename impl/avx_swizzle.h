@@ -243,7 +243,14 @@ zp::__m256 _mm256_permute_ps_cpp(zp::__m256 a) {
 
 /**/
 
-zp::__m256i _mm256_permute2f128_si256(zp::__m256i a, zp::__m256i b, int imm8) {
+#ifndef zeept_disable_marco_function
+#define _mm256_permute2f128_si256(a, b, imm8) _mm256_permute2f128_si256_cpp<imm8>(a, b)
+#define _mm256_permute2f128_pd(a, b, imm8) _mm256_permute2f128_pd_cpp<imm8>(a, b)
+#define _mm256_permute2f128_ps(a, b, imm8) _mm256_permute2f128_ps_cpp<imm8>(a, b)
+#endif
+
+template<uint32_t imm8>
+zp::__m256i _mm256_permute2f128_si256_cpp(zp::__m256i a, zp::__m256i b) {
     zp::__m256i r;
     int imlo = imm8;
     int imhi = imm8 >> 4;
@@ -269,16 +276,14 @@ zp::__m256i _mm256_permute2f128_si256(zp::__m256i a, zp::__m256i b, int imm8) {
     return r;
 }
 
-zp::__m256d _mm256_permute2f128_pd(zp::__m256d a, zp::__m256d b, int imm8) {
-    return zp::_mm256_castsi256_pd(_mm256_permute2f128_si256(zp::_mm256_castpd_si256(a),
-                                                        zp::_mm256_castpd_si256(b),
-                                                        imm8));
+template<uint32_t imm8>
+zp::__m256d _mm256_permute2f128_pd_cpp(zp::__m256d a, zp::__m256d b) {
+    return zp::_mm256_castsi256_pd(_mm256_permute2f128_si256_cpp<imm8>(zp::_mm256_castpd_si256(a),zp::_mm256_castpd_si256(b)));
 }
 
-zp::__m256 _mm256_permute2f128_ps(zp::__m256 a, zp::__m256 b, int imm8) {
-    return zp::_mm256_castsi256_ps(_mm256_permute2f128_si256(zp::_mm256_castps_si256(a),
-                                                        zp::_mm256_castps_si256(b),
-                                                        imm8));
+template<uint32_t imm8>
+zp::__m256 _mm256_permute2f128_ps_cpp(zp::__m256 a, zp::__m256 b) {
+    return zp::_mm256_castsi256_ps(_mm256_permute2f128_si256_cpp<imm8>(zp::_mm256_castps_si256(a),zp::_mm256_castps_si256(b)));
 }
 
 /*From 1 uops to the slowest*/
