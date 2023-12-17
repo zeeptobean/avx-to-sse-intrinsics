@@ -61,17 +61,19 @@ zp::__m256d _mm256_cvtps_pd(__m128 a) {
     return r;
 }
 
-/*packed, truncation, float64 -> int32*/
+/*packed float64 to single int64 with truncation*/
 __m128i _mm256_cvttpd_epi32(zp::__m256d a) {
-    //not actually implemented
-    __m128i r;
-    return r;
+    __m128i lo = _mm_cvttpd_epi32(a.lo);
+    __m128i hi = _mm_cvttpd_epi32(a.hi);
+    //unpack second low part to high part
+    return _mm_castpd_si128(_mm_unpacklo_pd(_mm_castsi128_pd(lo), _mm_castsi128_pd(hi)));
 }
 
 /*packed, truncation, float32 -> int32*/
-zp::__m256i _mm256_cvttpd_epi32(zp::__m256 a) {
-    //not actually implemented
+zp::__m256i _mm256_cvttps_epi32(zp::__m256 a) {
     zp::__m256i r;
+    r.lo = _mm_cvttps_epi32(a.lo);
+    r.hi = _mm_cvttps_epi32(a.hi);
     return r;
 }
 
