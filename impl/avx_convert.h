@@ -61,7 +61,7 @@ zp::__m256d _mm256_cvtps_pd(__m128 a) {
     return r;
 }
 
-/*packed float64 to single int64 with truncation*/
+/*packed float32 to single int32 with truncation*/
 __m128i _mm256_cvttpd_epi32(zp::__m256d a) {
     __m128i lo = _mm_cvttpd_epi32(a.lo);
     __m128i hi = _mm_cvttpd_epi32(a.hi);
