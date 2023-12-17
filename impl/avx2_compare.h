@@ -37,6 +37,35 @@ zp::__m256i _mm256_cmpeq_epi8(zp::__m256i a, zp::__m256i b) {
 
 /**/
 
+zp::__m256i _mm256_cmpgt_epi16(zp::__m256i a, zp::__m256i b) {
+    zp::__m256i r;
+    r.lo = _mm_cmpgt_epi16(a.lo, b.lo);
+    r.hi = _mm_cmpgt_epi16(a.hi, b.hi);
+    return r;
+}
+
+zp::__m256i _mm256_cmpgt_epi32(zp::__m256i a, zp::__m256i b) {
+    zp::__m256i r;
+    r.lo = _mm_cmpgt_epi32(a.lo, b.lo);
+    r.hi = _mm_cmpgt_epi32(a.hi, b.hi);
+    return r;
+}
+
+zp::__m256i _mm256_cmpgt_epi64(zp::__m256i a, zp::__m256i b) {
+zp::__m256i r;
+    r.lo = _mm_cmpgt_epi64(a.lo, b.lo);
+    r.hi = _mm_cmpgt_epi64(a.hi, b.hi);
+    return r;
+}
+
+zp::__m256i _mm256_cmpgt_epi8(zp::__m256i a, zp::__m256i b) {
+    zp::__m256i r;
+    r.lo = _mm_cmpgt_epi8(a.lo, b.lo);
+    r.hi = _mm_cmpgt_epi8(a.hi, b.hi);
+    return r;
+}
+
+/*Accidentally implemented despite not having in actual instruction set. Untest*/
 
 zp::__m256i _mm256_cmplt_epi16(zp::__m256i a, zp::__m256i b) {
     zp::__m256i r;
