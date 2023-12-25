@@ -106,5 +106,24 @@ uint16_t zp_internal_interleave_bw(uint8_t x, uint8_t y) {
     return z;
 }
 
+//Convert all 32bit elements with highest bit set to -1 (set all bit in that element) 
+__m128i zp_internal_mask_highestbit_to_fullbit32(__m128i mask) {
+    const __m128i allone = _mm_set1_epi32(-1);
+
+    mask = _mm_xor_si128(mask, allone); //flip all bit
+    mask = _mm_srli_epi32(mask, 31);    //shift highest bit to lowest
+    //Two-compliment addition: 111...11 would become 0 if the initial highest bit is unset
+    //Otherwise remain same 
+    return _mm_add_epi32(allone, mask);
+}
+
+//Convert all 64bit elements with highest bit set to -1 (set all bit in that element) 
+__m128i zp_internal_mask_highestbit_to_fullbit64(__m128i mask) {
+    const __m128i allone = _mm_set1_epi64x(-1LL);
+    
+    mask = _mm_xor_si128(mask, allone);
+    mask = _mm_srli_epi64(mask, 63);
+    return _mm_add_epi64(allone, mask);
+}
 
 #endif
