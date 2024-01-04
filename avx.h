@@ -19,6 +19,7 @@
 #include "impl/avx2_arithmetic.h"
 #include "impl/avx2_compare.h"
 #include "impl/avx2_convert.h"
+#include "impl/avx2_load.hpp"
 #include "impl/avx2_logical.h"
 #include "impl/avx2_prob.h"
 #include "impl/avx2_shift.h"
