@@ -24,5 +24,6 @@
 #include "impl/avx2_prob.h"
 #include "impl/avx2_shift.h"
 #include "impl/avx2_specialmath.h"
+#include "impl/avx2_store.hpp"
 #include "impl/fma3.h"
 #include "impl/pclmulqdq.h"
