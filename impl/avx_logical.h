@@ -2,6 +2,7 @@
 #define zp_avx_logical_incl
 
 #include "../base.h"
+#include "internal_func.h"
 
 namespace zp {
 
@@ -130,10 +131,7 @@ int _mm256_testc_pd(zp::__m256d a, zp::__m256d b) {
     a.hi = _mm_andnot_pd(a.hi, b.hi);
     int cf = _mm_test_all_zeros(_mm_castpd_si128(_mm_or_pd(a.lo, a.hi)), _mm_setzero_si128());
 
-    if(zf) asm("cmpq %rsp, %rsp");
-    else asm("testq %rsp, %rsp");
-    if(cf) asm("STC");
-    else asm("CLC");
+    zp_internal_set_zf_cf_flag(zf, cf);
 
     return cf;
 }
@@ -152,10 +150,7 @@ int _mm256_testz_pd(zp::__m256d a, zp::__m256d b) {
     a.hi = _mm_andnot_pd(a.hi, b.hi);
     int cf = _mm_test_all_zeros(_mm_castpd_si128(_mm_or_pd(a.lo, a.hi)), _mm_setzero_si128());
 
-    if(zf) asm("cmpq %rsp, %rsp");
-    else asm("testq %rsp, %rsp");
-    if(cf) asm("STC");
-    else asm("CLC");
+    zp_internal_set_zf_cf_flag(zf, cf);
 
     return zf;
 }
@@ -174,10 +169,7 @@ int _mm256_testnzc_pd(zp::__m256d a, zp::__m256d b) {
     a.hi = _mm_andnot_pd(a.hi, b.hi);
     int cf = _mm_test_all_zeros(_mm_castpd_si128(_mm_or_pd(a.lo, a.hi)), _mm_setzero_si128());
 
-    if(zf) asm("cmpq %rsp, %rsp");
-    else asm("testq %rsp, %rsp");
-    if(cf) asm("STC");
-    else asm("CLC");
+    zp_internal_set_zf_cf_flag(zf, cf);
 
     return (zf+cf == 0);
 }
@@ -196,10 +188,7 @@ int _mm256_testc_ps(zp::__m256 a, zp::__m256 b) {
     a.hi = _mm_andnot_ps(a.hi, b.hi);
     int cf = _mm_test_all_zeros(_mm_castps_si128(_mm_or_ps(a.lo, a.hi)), _mm_setzero_si128());
 
-    if(zf) asm("cmpq %rsp, %rsp");
-    else asm("testq %rsp, %rsp");
-    if(cf) asm("STC");
-    else asm("CLC");
+    zp_internal_set_zf_cf_flag(zf, cf);
 
     return cf;
 }
@@ -218,10 +207,7 @@ int _mm256_testz_ps(zp::__m256 a, zp::__m256 b) {
     a.hi = _mm_andnot_ps(a.hi, b.hi);
     int cf = _mm_test_all_zeros(_mm_castps_si128(_mm_or_ps(a.lo, a.hi)), _mm_setzero_si128());
 
-    if(zf) asm("cmpq %rsp, %rsp");
-    else asm("testq %rsp, %rsp");
-    if(cf) asm("STC");
-    else asm("CLC");
+    zp_internal_set_zf_cf_flag(zf, cf);
 
     return zf;
 }
@@ -240,10 +226,7 @@ int _mm256_testnzc_ps(zp::__m256 a, zp::__m256 b) {
     a.hi = _mm_andnot_ps(a.hi, b.hi);
     int cf = _mm_test_all_zeros(_mm_castps_si128(_mm_or_ps(a.lo, a.hi)), _mm_setzero_si128());
 
-    if(zf) asm("cmpq %rsp, %rsp");
-    else asm("testq %rsp, %rsp");
-    if(cf) asm("STC");
-    else asm("CLC");
+    zp_internal_set_zf_cf_flag(zf, cf);
 
     return (zf+cf == 0);
 }
@@ -254,10 +237,7 @@ int _mm256_testc_si256(zp::__m256i a, zp::__m256i b) {
     int zf = _mm_test_all_zeros(_mm_and_si128(a.lo, b.lo), _mm_and_si128(a.hi, b.hi));
     int cf = _mm_test_all_zeros(_mm_andnot_si128(a.lo, b.lo), _mm_andnot_si128(a.hi, b.hi));
     
-    if(zf) asm("cmpq %rsp, %rsp");
-    else asm("testq %rsp, %rsp");
-    if(cf) asm("STC");
-    else asm("CLC");
+    zp_internal_set_zf_cf_flag(zf, cf);
 
     return cf;
 }
@@ -266,10 +246,7 @@ int _mm256_testz_si256(zp::__m256i a, zp::__m256i b) {
     int zf = _mm_test_all_zeros(_mm_and_si128(a.lo, b.lo), _mm_and_si128(a.hi, b.hi));
     int cf = _mm_test_all_zeros(_mm_andnot_si128(a.lo, b.lo), _mm_andnot_si128(a.hi, b.hi));
     
-    if(zf) asm("cmpq %rsp, %rsp");
-    else asm("testq %rsp, %rsp");
-    if(cf) asm("STC");
-    else asm("CLC");
+    zp_internal_set_zf_cf_flag(zf, cf);
 
     return zf;
 }
@@ -278,10 +255,7 @@ int _mm256_testnzc_si256(zp::__m256i a, zp::__m256i b) {
     int zf = _mm_test_all_zeros(_mm_and_si128(a.lo, b.lo), _mm_and_si128(a.hi, b.hi));
     int cf = _mm_test_all_zeros(_mm_andnot_si128(a.lo, b.lo), _mm_andnot_si128(a.hi, b.hi));
     
-    if(zf) asm("cmpq %rsp, %rsp");
-    else asm("testq %rsp, %rsp");
-    if(cf) asm("STC");
-    else asm("CLC");
+    zp_internal_set_zf_cf_flag(zf, cf);
 
     return zf + cf == 0;
 }

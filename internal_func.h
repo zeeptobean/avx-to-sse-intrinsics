@@ -141,4 +141,18 @@ __m128i zp_internal_mask_highestbit_to_fullbit64(__m128i mask) {
     return _mm_add_epi64(allone, mask);
 }
 
+void zp_internal_set_zf_cf_flag(int zf, int cf) {
+#if __x86_64__
+    if(zf) asm("cmpq %rsp, %rsp");
+    else asm("testq %rsp, %rsp");
+    if(cf) asm("STC");
+    else asm("CLC");
+#else
+    if(zf) asm("cmpl %esp, %esp");
+    else asm("testl %esp, %esp");
+    if(cf) asm("STC");
+    else asm("CLC");
+#endif
+}
+
 #endif
