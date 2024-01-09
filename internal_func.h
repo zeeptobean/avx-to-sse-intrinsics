@@ -4,12 +4,27 @@
 #include "base.h"
 
 void zp_internal_umul128(uint64_t x, uint64_t y, uint64_t *lo, uint64_t *hi) {
+#if __x86_64__
 #ifdef _MSC_VER 
     *lo = _umul128(x, y, hi);
 #else
     __uint128_t result = (__uint128_t)x * y;
     *lo = (uint64_t) result;
     *hi = (uint64_t) (result >> 64);
+#endif
+#else   //emulation for 32bit
+    /* First calculate all of the cross products. */
+    uint64_t lo_lo = (x & 0xFFFFFFFF) * (y & 0xFFFFFFFF);
+    uint64_t hi_lo = (x >> 32)        * (y & 0xFFFFFFFF);
+    uint64_t lo_hi = (x & 0xFFFFFFFF) * (y >> 32);
+    uint64_t hi_hi = (x >> 32)        * (y >> 32);
+
+    /* Now add the products together. These will never overflow. */
+    uint64_t cross = (lo_lo >> 32) + (hi_lo & 0xFFFFFFFF) + lo_hi;
+    uint64_t upper = (hi_lo >> 32) + (cross >> 32)        + hi_hi;
+
+    *hi = upper;
+    *lo = (cross << 32) | (lo_lo & 0xFFFFFFFF);
 #endif
 }
 
