@@ -195,7 +195,7 @@ __m128 _mm_i32gather_ps_cpp(float *base, __m128i index) {
         element[i] = base[(int64_t) indexarr[i]*scale];
     }
     __m128 r;
-    r = _mm_load_ps((__m128i) element);
+    r = _mm_load_ps(element);
     return r;
 }
 
@@ -212,15 +212,15 @@ zp::__m256 _mm256_i32gather_ps_cpp(float *base, zp::__m256i index) {
     }
     zp::__m256 r;
     //better integer-fp cross penalty & avoid single movdqu in current impl of _mm256_castsi256_(pd/ps)
-    r.lo = _mm_load_ps((__m128*) element);
-    r.hi = _mm_load_ps((__m128*) &element[4]);
+    r.lo = _mm_load_ps(element);
+    r.hi = _mm_load_ps(&element[4]);
     return r;
 }
 
 /*gather f32 elements, 64bit indices, unmasked*/
 
-template <uint64_t scale> k
-__m128i _mm_i64gather_ps_cpp(float *base, __m128i index) {
+template <uint64_t scale>
+__m128 _mm_i64gather_ps_cpp(float *base, __m128i index) {
     static_assert(scale == 1 || scale == 2 || scale == 4 || scale == 8, "scale must be 1, 2, 4, 8");
     
     int64_t indexarr[2];
@@ -231,12 +231,12 @@ __m128i _mm_i64gather_ps_cpp(float *base, __m128i index) {
         element[i] = base[indexarr[i]*scale];
     }
     __m128 r;
-    r = _mm_load_ps((__m128*) element);
+    r = _mm_load_ps(element);
     return r;
 }
 
 template <uint64_t scale> 
-__m128i _mm256_i64gather_ps_cpp(float *base, zp::__m256i index) {
+__m128 _mm256_i64gather_ps_cpp(float *base, zp::__m256i index) {
     static_assert(scale == 1 || scale == 2 || scale == 4 || scale == 8, "scale must be 1, 2, 4, 8");
     
     int64_t indexarr[4];
@@ -247,7 +247,7 @@ __m128i _mm256_i64gather_ps_cpp(float *base, zp::__m256i index) {
         element[i] = base[indexarr[i]*scale];
     }
     __m128 r;
-    r = _mm_load_ps((__m128*) element);
+    r = _mm_load_ps(element);
     return r;
 }
 
@@ -264,7 +264,7 @@ __m128d _mm_i32gather_pd_cpp(double *base, __m128i index) {
         element[i] = base[(int64_t) indexarr[i]*scale];
     }
     __m128d r;
-    r = _mm_load_pd((__m128d*) element);
+    r = _mm_load_pd(element);
     return r;
 }
 
@@ -279,8 +279,8 @@ zp::__m256d _mm256_i32gather_pd_cpp(double *base, __m128i index) {
         element[i] = base[(int64_t) indexarr[i]*scale];
     }
     zp::__m256d r;
-    r.lo = _mm_load_pd((__m128d*) element);
-    r.hi = _mm_load_pd((__m128d*) &element[2]);
+    r.lo = _mm_load_pd(element);
+    r.hi = _mm_load_pd(&element[2]);
     return r;
 }
 
@@ -297,7 +297,7 @@ __m128d _mm_i64gather_pd_cpp(double *base, __m128i index) {
         element[i] = base[indexarr[i]*scale];
     }
     __m128d r;
-    r = _mm_load_pd((__m128d*) element);
+    r = _mm_load_pd(element);
     return r;
 }
 
@@ -313,8 +313,8 @@ zp::__m256d _mm256_i64gather_pd_cpp(double *base, zp::__m256i index) {
         element[i] = base[indexarr[i]*scale];
     }
     zp::__m256d r;
-    r.lo = _mm_load_pd((__m128d*) element);
-    r.hi = _mm_load_pd((__m128d*) &element[2]);
+    r.lo = _mm_load_pd(element);
+    r.hi = _mm_load_pd(&element[2]);
     return r;
 }
 
@@ -376,7 +376,7 @@ __m128i _mm_mask_i64gather_epi32_cpp(__m128i src, int32_t *base, __m128i index, 
     static_assert(scale == 1 || scale == 2 || scale == 4 || scale == 8, "scale must be 1, 2, 4, 8");
     
     const __m128i allone = _mm_set1_epi32(-1);
-    const __m128i upperzero = _mm_set_epi64(0, ~0);
+    const __m128i upperzero = _mm_set_epi64x(0, ~0);
     int64_t indexarr[2];
     int32_t element[4];
     _mm_store_si128((__m128i*) indexarr, index);
@@ -429,7 +429,7 @@ __m128i _mm_mask_i32gather_epi64_cpp(__m128i src, int64_t *base, __m128i index, 
     for(int i=0; i < 2; i++) {
         element[i] = base[(int64_t) indexarr[i]*scale];
     }
-    __m128d r;
+    __m128i r;
     r = _mm_load_si128((__m128i*) element);
     mask = zp_internal_mask_highestbit_to_fullbit64(mask);
     r = _mm_and_si128(r, mask);
@@ -472,7 +472,7 @@ template <uint64_t scale>
 __m128i _mm_mask_i64gather_epi64_cpp(__m128i src, int64_t *base, __m128i index, __m128i mask) {
     static_assert(scale == 1 || scale == 2 || scale == 4 || scale == 8, "scale must be 1, 2, 4, 8");
     
-    const __m128i allone = _mm_set1_epi64(-1);
+    const __m128i allone = _mm_set1_epi64x(-1);
     int64_t indexarr[2];
     int64_t element[2];
     _mm_store_si128((__m128i*) indexarr, index);
@@ -493,7 +493,7 @@ template <uint64_t scale>
 zp::__m256i _mm256_mask_i64gather_epi64_cpp(zp::__m256i src, int64_t *base, zp::__m256i index, zp::__m256i mask) {
     static_assert(scale == 1 || scale == 2 || scale == 4 || scale == 8, "scale must be 1, 2, 4, 8");
     
-    const __m128i allone = _mm_set1_epi64(-1);
+    const __m128i allone = _mm_set1_epi64x(-1);
     int64_t indexarr[4];
     int64_t element[4];
     _mm_store_si128((__m128i*) indexarr, index.lo);
@@ -531,7 +531,7 @@ __m128 _mm_mask_i32gather_ps_cpp(__m128 src, float *base, __m128i index, __m128 
         element[i] = base[(int64_t) indexarr[i]*scale];
     }
     __m128 r;
-    r = _mm_load_ps((__m128i) element);
+    r = _mm_load_ps(element);
     mask = _mm_castsi128_ps(zp_internal_mask_highestbit_to_fullbit32(_mm_castps_si128(mask)));  //save code; could hurt performance
     r = _mm_and_ps(r, mask);
     mask = _mm_xor_ps(mask, allone);
@@ -553,8 +553,8 @@ zp::__m256 _mm256_mask_i32gather_ps_cpp(zp::__m256 src, float *base, zp::__m256i
         element[i] = base[(int64_t) indexarr[i]*scale];
     }
     zp::__m256 r;
-    r.lo = _mm_load_ps((__m128*) element);
-    r.hi = _mm_load_ps((__m128*) &element[4]);
+    r.lo = _mm_load_ps(element);
+    r.hi = _mm_load_ps(&element[4]);
     mask.lo = _mm_castsi128_ps(zp_internal_mask_highestbit_to_fullbit32(_mm_castps_si128(mask.lo)));
     mask.hi = _mm_castsi128_ps(zp_internal_mask_highestbit_to_fullbit32(_mm_castps_si128(mask.hi)));
     r.lo = _mm_and_ps(r.lo, mask.lo);
@@ -571,11 +571,11 @@ zp::__m256 _mm256_mask_i32gather_ps_cpp(zp::__m256 src, float *base, zp::__m256i
 /*gather f32 elements, 64bit indices, masked*/
 
 template <uint64_t scale> 
-__m128i _mm_mask_i64gather_ps_cpp(__m128 src, float *base, __m128i index, __m128 mask) {
+__m128 _mm_mask_i64gather_ps_cpp(__m128 src, float *base, __m128i index, __m128 mask) {
     static_assert(scale == 1 || scale == 2 || scale == 4 || scale == 8, "scale must be 1, 2, 4, 8");
     
     const __m128 allone = _mm_castsi128_ps(_mm_set1_epi32(-1));
-    const __m128 upperzero = _mm_castsi128_ps(_mm_set_epi64(0, ~0));
+    const __m128 upperzero = _mm_castsi128_ps(_mm_set_epi64x(0, ~0));
     int64_t indexarr[2];
     float element[4];
     _mm_store_si128((__m128i*) indexarr, index);
@@ -583,7 +583,7 @@ __m128i _mm_mask_i64gather_ps_cpp(__m128 src, float *base, __m128i index, __m128
         element[i] = base[indexarr[i]*scale];
     }
     __m128 r;
-    r = _mm_load_ps((__m128*) element);
+    r = _mm_load_ps(element);
     mask = _mm_castsi128_ps(zp_internal_mask_highestbit_to_fullbit32(_mm_castps_si128(mask)));
     r = _mm_and_ps(r, mask);
     mask = _mm_xor_ps(mask, allone);
@@ -594,7 +594,7 @@ __m128i _mm_mask_i64gather_ps_cpp(__m128 src, float *base, __m128i index, __m128
 }
 
 template <uint64_t scale> 
-__m128i _mm256_mask_i64gather_ps_cpp(__m128 src, int32_t *base, zp::__m256i index, __m128 mask) {
+__m128 _mm256_mask_i64gather_ps_cpp(__m128 src, int32_t *base, zp::__m256i index, __m128 mask) {
     static_assert(scale == 1 || scale == 2 || scale == 4 || scale == 8, "scale must be 1, 2, 4, 8");
     
     const __m128 allone = _mm_castsi128_ps(_mm_set1_epi32(-1));
@@ -606,7 +606,7 @@ __m128i _mm256_mask_i64gather_ps_cpp(__m128 src, int32_t *base, zp::__m256i inde
         element[i] = base[indexarr[i]*scale];
     }
     __m128 r;
-    r = _mm_load_ps((__m128*) element);
+    r = _mm_load_ps(element);
     mask = _mm_castsi128_ps(zp_internal_mask_highestbit_to_fullbit32(_mm_castps_si128(mask)));
     r = _mm_and_ps(r, mask);
     mask = _mm_xor_ps(mask, allone);
@@ -629,7 +629,7 @@ __m128d _mm_mask_i32gather_pd_cpp(__m128d src, double *base, __m128i index, __m1
         element[i] = base[(int64_t) indexarr[i]*scale];
     }
     __m128d r;
-    r = _mm_load_pd((__m128d*) element);
+    r = _mm_load_pd(element);
     mask = _mm_castsi128_pd(zp_internal_mask_highestbit_to_fullbit64(_mm_castpd_si128(mask)));
     r = _mm_and_pd(r, mask);
     mask = _mm_xor_pd(mask, allone);
@@ -639,7 +639,7 @@ __m128d _mm_mask_i32gather_pd_cpp(__m128d src, double *base, __m128i index, __m1
 }
 
 template <uint64_t scale> 
-zp::__m256i _mm256_mask_i32gather_pd_cpp(zp::__m256d src, double *base, __m128i index, zp::__m256d mask) {
+zp::__m256d _mm256_mask_i32gather_pd_cpp(zp::__m256d src, double *base, __m128i index, zp::__m256d mask) {
     static_assert(scale == 1 || scale == 2 || scale == 4 || scale == 8, "scale must be 1, 2, 4, 8");
     
     const __m128d allone = _mm_castsi128_pd(_mm_set1_epi32(-1));
@@ -650,8 +650,8 @@ zp::__m256i _mm256_mask_i32gather_pd_cpp(zp::__m256d src, double *base, __m128i 
         element[i] = base[(int64_t) indexarr[i]*scale];
     }
     zp::__m256d r;
-    r.lo = _mm_load_pd((__m128d*) element);
-    r.hi = _mm_load_pd((__m128d*) &element[2]);
+    r.lo = _mm_load_pd(element);
+    r.hi = _mm_load_pd(&element[2]);
     mask.lo = _mm_castsi128_pd(zp_internal_mask_highestbit_to_fullbit64(_mm_castpd_si128(mask.lo)));
     mask.hi = _mm_castsi128_pd(zp_internal_mask_highestbit_to_fullbit64(_mm_castpd_si128(mask.hi)));
     r.lo = _mm_and_pd(r.lo, mask.lo);
@@ -668,7 +668,7 @@ zp::__m256i _mm256_mask_i32gather_pd_cpp(zp::__m256d src, double *base, __m128i 
 /*gather f64 elements, 64bit indices, masked*/
 
 template <uint64_t scale> 
-__m128i _mm_mask_i64gather_pd_cpp(__m128d src, double *base, __m128i index, __m128d mask) {
+__m128d _mm_mask_i64gather_pd_cpp(__m128d src, double *base, __m128i index, __m128d mask) {
     static_assert(scale == 1 || scale == 2 || scale == 4 || scale == 8, "scale must be 1, 2, 4, 8");
     
     const __m128d allone = _mm_castsi128_pd(_mm_set1_epi32(-1));
@@ -679,7 +679,7 @@ __m128i _mm_mask_i64gather_pd_cpp(__m128d src, double *base, __m128i index, __m1
         element[i] = base[indexarr[i]*scale];
     }
     __m128d r;
-    r = _mm_load_pd((__m128d*) element);
+    r = _mm_load_pd(element);
     mask = _mm_castsi128_pd(zp_internal_mask_highestbit_to_fullbit64(_mm_castpd_si128(mask)));
     r = _mm_and_pd(r, mask);
     mask = _mm_xor_pd(mask, allone);
@@ -689,7 +689,7 @@ __m128i _mm_mask_i64gather_pd_cpp(__m128d src, double *base, __m128i index, __m1
 }
 
 template <uint64_t scale> 
-zp::__m256i _mm256_mask_i64gather_pd_cpp(zp::__m256d src, int64_t *base, zp::__m256i index, zp::__m256d mask) {
+zp::__m256d _mm256_mask_i64gather_pd_cpp(zp::__m256d src, int64_t *base, zp::__m256i index, zp::__m256d mask) {
     static_assert(scale == 1 || scale == 2 || scale == 4 || scale == 8, "scale must be 1, 2, 4, 8");
     
     const __m128d allone = _mm_castsi128_pd(_mm_set1_epi32(-1));
@@ -701,8 +701,8 @@ zp::__m256i _mm256_mask_i64gather_pd_cpp(zp::__m256d src, int64_t *base, zp::__m
         element[i] = base[indexarr[i]*scale];
     }
     zp::__m256d r;
-    r.lo = _mm_load_pd((__m128d*) element);
-    r.hi = _mm_load_pd((__m128d*) &element[2]);
+    r.lo = _mm_load_pd(element);
+    r.hi = _mm_load_pd(&element[2]);
     mask.lo = _mm_castsi128_pd(zp_internal_mask_highestbit_to_fullbit64(_mm_castpd_si128(mask.lo)));
     mask.hi = _mm_castsi128_pd(zp_internal_mask_highestbit_to_fullbit64(_mm_castpd_si128(mask.hi)));
     r.lo = _mm_and_pd(r.lo, mask.lo);
