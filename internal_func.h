@@ -64,14 +64,14 @@ __m128i zp_internal_paddsd(__m128i a, __m128i b) {
 uint64_t zp_internal_interleave_dwqw(uint32_t x, uint32_t y) {
     uint64_t z = 0;
 
-    for (int i = 0; i < sizeof(x) * 8; i++) {
+    for (int i = 0; i < 32; i++) {
         z |= (x & 1U << i) << i | (y & 1U << i) << (i + 1);
     }
     return z;
 }
 
-uint32_t zp_internal_interleave_wdw2(uint16_t x, uint16_t y) {
-    static const uint16_t MortonTable256[256] =  {
+constexpr uint32_t zp_internal_interleave_wdw2(uint16_t x, uint16_t y) {
+    const uint16_t MortonTable256[256] =  {
     0x0000, 0x0001, 0x0004, 0x0005, 0x0010, 0x0011, 0x0014, 0x0015, 
     0x0040, 0x0041, 0x0044, 0x0045, 0x0050, 0x0051, 0x0054, 0x0055, 
     0x0100, 0x0101, 0x0104, 0x0105, 0x0110, 0x0111, 0x0114, 0x0115, 
@@ -113,10 +113,10 @@ uint32_t zp_internal_interleave_wdw2(uint16_t x, uint16_t y) {
     return z; 
 }
 
-uint32_t zp_internal_interleave_wdw(uint16_t _x, uint16_t _y) {
-    static const uint32_t B[] = {0x55555555, 0x33333333, 0x0F0F0F0F, 0x00FF00FF};
-    static const uint16_t S[] = {1, 2, 4, 8};
-    uint32_t x = _x, y = _y, z;
+constexpr uint32_t zp_internal_interleave_wdw(uint16_t _x, uint16_t _y) {
+    const uint32_t B[] = {0x55555555, 0x33333333, 0x0F0F0F0F, 0x00FF00FF};
+    const uint16_t S[] = {1, 2, 4, 8};
+    uint32_t x = _x, y = _y, z = 0;
 
     x = (x | (x << S[3])) & B[3];
     x = (x | (x << S[2])) & B[2];
@@ -132,11 +132,9 @@ uint32_t zp_internal_interleave_wdw(uint16_t _x, uint16_t _y) {
     return z;
 }
 
-uint16_t zp_internal_interleave_bw(uint8_t x, uint8_t y) {
-    uint16_t z = ((x * 0x0101010101010101ULL & 0x8040201008040201ULL) * 
-                0x0102040810204081ULL >> 49) & 0x5555 |
-                ((y * 0x0101010101010101ULL & 0x8040201008040201ULL) * 
-                0x0102040810204081ULL >> 48) & 0xAAAA;
+constexpr uint16_t zp_internal_interleave_bw(uint8_t x, uint8_t y) {
+    uint16_t z = (((x * 0x0101010101010101ULL & 0x8040201008040201ULL) * 0x0102040810204081ULL >> 49) & 0x5555) |
+                (((y * 0x0101010101010101ULL & 0x8040201008040201ULL) * 0x0102040810204081ULL >> 48) & 0xAAAA);
     return z;
 }
 
