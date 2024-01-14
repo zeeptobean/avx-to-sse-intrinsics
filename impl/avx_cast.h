@@ -3,34 +3,44 @@
 
 #include "../base.h"
 
-/*Funny type-punning functions*/
-
 namespace zp {
 
 /**/
 
 zp::__m256 _mm256_castpd_ps(zp::__m256d a) {
-    return *(zp::__m256*) &a;
+    zp::__m256 r;
+    memcpy(&r, &a, 32);
+    return r;
 }
 
 zp::__m256i _mm256_castpd_si256(zp::__m256d a) {
-    return *(zp::__m256i*) &a;
+    zp::__m256i r;
+    memcpy(&r, &a, 32);
+    return r;
 }
 
 zp::__m256d _mm256_castps_pd(zp::__m256 a) {
-    return *(zp::__m256d*) &a;
+    zp::__m256d r;
+    memcpy(&r, &a, 32);
+    return r;
 }
 
 zp::__m256i _mm256_castps_si256(zp::__m256 a) {
-    return *(zp::__m256i*) &a;
+    zp::__m256i r;
+    memcpy(&r, &a, 32);
+    return r;
 }
 
 zp::__m256d _mm256_castsi256_pd(zp::__m256i a) {
-    return *(zp::__m256d*) &a;
+    zp::__m256d r;
+    memcpy(&r, &a, 32);
+    return r;
 }
 
 zp::__m256 _mm256_castsi256_ps(zp::__m256i a) {
-    return *(zp::__m256*) &a;
+    zp::__m256 r;
+    memcpy(&r, &a, 32);
+    return r;
 }
 
 /**/
