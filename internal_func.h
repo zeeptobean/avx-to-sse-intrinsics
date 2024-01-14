@@ -70,7 +70,7 @@ uint64_t zp_internal_interleave_dwqw(uint32_t x, uint32_t y) {
     return z;
 }
 
-uint32_t zp_internal_interleave_wdw(uint16_t x, uint16_t y) {
+uint32_t zp_internal_interleave_wdw2(uint16_t x, uint16_t y) {
     static const uint16_t MortonTable256[256] =  {
     0x0000, 0x0001, 0x0004, 0x0005, 0x0010, 0x0011, 0x0014, 0x0015, 
     0x0040, 0x0041, 0x0044, 0x0045, 0x0050, 0x0051, 0x0054, 0x0055, 
@@ -111,6 +111,25 @@ uint32_t zp_internal_interleave_wdw(uint16_t x, uint16_t y) {
                 MortonTable256[y & 0xFF] <<  1 | 
                 MortonTable256[x & 0xFF];
     return z; 
+}
+
+uint32_t zp_internal_interleave_wdw(uint16_t _x, uint16_t _y) {
+    static const uint32_t B[] = {0x55555555, 0x33333333, 0x0F0F0F0F, 0x00FF00FF};
+    static const uint16_t S[] = {1, 2, 4, 8};
+    uint32_t x = _x, y = _y, z;
+
+    x = (x | (x << S[3])) & B[3];
+    x = (x | (x << S[2])) & B[2];
+    x = (x | (x << S[1])) & B[1];
+    x = (x | (x << S[0])) & B[0];
+
+    y = (y | (y << S[3])) & B[3];
+    y = (y | (y << S[2])) & B[2];
+    y = (y | (y << S[1])) & B[1];
+    y = (y | (y << S[0])) & B[0];
+
+    z = x | (y << 1);
+    return z;
 }
 
 uint16_t zp_internal_interleave_bw(uint8_t x, uint8_t y) {
