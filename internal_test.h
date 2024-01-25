@@ -34,6 +34,25 @@ double zp_gen_double(int32_t lo, int32_t hi) {
     return f;
 }
 
+double zp_gen_double2(int64_t expect_lo, int64_t expect_hi) {
+    if(expect_lo > expect_hi) {
+        int64_t temp = expect_lo;
+        expect_lo = expect_hi;
+        expect_hi = temp; 
+    }
+
+    int64_t iupper = expect_lo + (int64_t) (rand_next() % (expect_hi-expect_lo+1));
+    uint64_t imantissa = (rand_next()) & 0xFFFFFFFFFFFFF;
+    double fupper = (double) iupper;
+    uint64_t punfupper;
+    memcpy(&punfupper, &fupper, 8);
+    punfupper = punfupper & ~0xFFFFFFFFFFFFF;
+    punfupper |= imantissa;
+    memcpy(&fupper, &punfupper, 8);
+    if(rand_next() % 74 == 47) rand_long_jump();
+    return fupper;
+}
+
 //Generate between [lo, hi]
 float zp_gen_float(int16_t lo, int16_t hi) {
     if(lo > hi) {
@@ -55,6 +74,25 @@ float zp_gen_float(int16_t lo, int16_t hi) {
     }
     if(rand_next() % 131 == 101) rand_jump();
     return f;
+}
+
+float zp_gen_float2(int64_t expect_lo, int64_t expect_hi) {
+    if(expect_lo > expect_hi) {
+        int64_t temp = expect_lo;
+        expect_lo = expect_hi;
+        expect_hi = temp; 
+    }
+
+    int64_t iupper = expect_lo + (int64_t) (rand_next() % (expect_hi-expect_lo+1));
+    uint32_t imantissa = ((uint32_t) rand_next()) & 0x7FFFFF;
+    float fupper = (float) iupper;
+    uint32_t punfupper;
+    memcpy(&punfupper, &fupper, 4);
+    punfupper = punfupper & ~0x7FFFFF;
+    punfupper |= imantissa;
+    memcpy(&fupper, &punfupper, 4);
+    if(rand_next() % 73 == 37) rand_long_jump();
+    return fupper;
 }
 
 //Generate between [lo, hi)
