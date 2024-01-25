@@ -28,7 +28,7 @@ double zp_gen_double(int32_t lo, int32_t hi) {
         rand_long_jump();
     }
     sscanf(str, "%lf", &f);
-    if(decimalpart % (intpart >> 9) == 2) {
+    if(decimalpart % 7 == 2) {
         rand_jump();
     }
     return f;
@@ -50,7 +50,7 @@ float zp_gen_float(int16_t lo, int16_t hi) {
         rand_long_jump();
     }
     sscanf(str, "%f", &f);
-    if(decimalpart % (intpart >> 9) == 2) {
+    if(decimalpart % 9 == 2) {
         rand_jump();
     }
     if(rand_next() % 131 == 101) rand_jump();
